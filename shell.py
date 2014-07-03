@@ -11,3 +11,5 @@ for filename in file_list:
     
     cmd2 = "python 2_BF_algorithm.py " + file_dir + filename + " > test/" + filename +"_test2.txt"
     os.system(cmd2)
+
+
