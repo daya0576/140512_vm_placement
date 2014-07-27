@@ -1,4 +1,12 @@
+#!/usr/bin/env python
+"""
+weighted network
+"""
 import networkx as nx
+try:
+	import matplotlib.pyplot as plt
+except:
+	raise
 import random
 import sys
 
@@ -30,7 +38,7 @@ def read_lines_from_file(filename):
 			
 	return lines_to_list(list_of_all_the_lines)
 
-def write_lines_to_file(filename):
+def write_lines_to_file(result_G_nodes, filename):
 	file_object = open(filename, 'w')
 	try:
 		for result in result_G_nodes:
@@ -100,53 +108,9 @@ def edges_to_weights(G):
 		
 	return edges_weight
 
-#While G has more than one node do mincut 
-
-def mincut_Graph(G, node):
-	global result_G
-	if(G.number_of_nodes() >= 2):
-					
-		nodes_tmp = G.nodes()
-		souce_node = random.choice(nodes_tmp)
-		nodes_tmp.remove(souce_node)
-		sink_node = random.choice(nodes_tmp)
-		
-		mincut_edges = nx.minimum_st_edge_cut(G, souce_node, sink_node, capacity='weight')		
-		#print "cutted edges:", mincut_edges
-		
-		G.remove_edges_from(mincut_edges)
-
-		wcc = nx.connected_component_subgraphs(G)
-		if souce_node in wcc[0].nodes():
-			G1 = wcc[0]
-			G2 = wcc[1]
-		else:
-			G1 = wcc[1]
-			G2 = wcc[0]
-		
-		G1_weights = edges_to_weights(G1)
-		G1_weights_sum = sum(G1_weights)
-
-		G2_weights = edges_to_weights(G2)
-		G2_weights_sum = sum(G2_weights)
-				
-		if(G1_weights_sum > G2_weights_sum):
-			result_G.insert(result_G.index(G), G1)
-			result_G.insert(result_G.index(G) + 1, G2)
-		else:
-			result_G.insert(result_G.index(G) + 1, G1)
-			result_G.insert(result_G.index(G), G2)
-		
-		result_G.remove(G)	
-		
-		mincut_Graph(G1, souce_node)
-		mincut_Graph(G2, sink_node)
-		
-	else:
-		return
-		
 
 #Initial G = (V, E)
+
 G_origin = nx.Graph() 
 
 file_lists = read_lines_from_file(vm_flow_file)
@@ -156,58 +120,41 @@ print "total_nodes:", total_nodes
 print "total_edges:", total_edges
 
 G_origin.add_weighted_edges_from(G_origin_lists)
+vm_active_list = G_origin.nodes()
 wcc = nx.connected_component_subgraphs(G_origin)
 
-vm_active_list = G_origin.nodes()
-vm_active_list.sort()
-#print "G:", vm_active_list
-print "vm_sum:", len(G_origin.nodes())
-'''
-if sort == 1:
-	for i in range(len(wcc)):
-		for j in range(len(wcc)):
-			if i < j:
-				#if sum(edges_to_weights(wcc[i])) < sum(edges_to_weights(wcc[j])):
-				if len(wcc[i].edges()) < len(wcc[j].edges()):
-					tmp = wcc[i]
-					wcc[i] = wcc[j]
-					wcc[j] = tmp
-'''
+result_G_nodes = []
 for sub_G in wcc:
-	#print len(sub_G.edges())
-	result_G.append(sub_G)
-	mincut_Graph(sub_G, 0)
-
-result_G_nodes = G_to_nodes(result_G)
+	print sub_G.nodes()
+	for node in sub_G.nodes():
+		result_G_nodes.append(node)
 
 
-print "final_result:", result_G_nodes
-print "final_result_sum:", len(result_G_nodes)
-
-write_lines_to_file("1_MC_BT_result/nodes_result.data")
-
-
-			
+print "result_G_nodes", result_G_nodes
+print "len", len(result_G_nodes)
+write_lines_to_file(vm_active_list, "1_MC_BT_result/nodes_result.data")
 
 
 
+elarge=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] >0.5]
+esmall=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] <=0.5]
 
+pos=nx.spring_layout(G_origin) # positions for all nodes
 
+# nodes
+nx.draw_networkx_nodes(G_origin,pos,node_size=300)
 
+# edges
+nx.draw_networkx_edges(G_origin,pos,edgelist=elarge,
+                    width=3)
+nx.draw_networkx_edges(G_origin,pos,edgelist=esmall,
+                    width=3,alpha=0.5,edge_color='b',style='dashed')
 
+# labels
+nx.draw_networkx_labels(G_origin, pos, font_size=10, font_family='sans-serif')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+plt.axis('off')
+plt.savefig("weighted_graph.png") # save as png
+plt.show() # display
 
 

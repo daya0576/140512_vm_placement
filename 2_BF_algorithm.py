@@ -97,7 +97,7 @@ vm_cpu_mem_file = "input/vm_cost/Node1024_cpu0.5_men0.3_stdvar0.5"
 
 PM_capacity_cpu = 1
 PM_capacity_mem = 1
-PM_cpu_weight = 5.0
+PM_cpu_weight = 1.0
 PM_capacity = PM_capacity_cpu * PM_cpu_weight + PM_capacity_mem
 
 VMlist = nodes_result
