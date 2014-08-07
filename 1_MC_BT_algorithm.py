@@ -69,11 +69,7 @@ def vm_sum(VMlist_flow_list):
 			vm_all.append(vm_list[1])        
 	return len(vm_all)
 
-def G_to_nodes(list_G):
-	nodes = []
-	for G in list_G:
-		nodes += G.nodes()
-	return nodes
+
 
 def G_to_edges_and_weights(list_G):
 	G_weights = []
@@ -128,7 +124,7 @@ def draw_graph(G_origin):
 
 #Initial G = (V, E)
 
-G_origin = nx.Graph() 
+G_origin = nx.Graph()
 
 file_lists = read_lines_from_file(vm_flow_file)
 
@@ -137,19 +133,27 @@ print "total_nodes:", total_nodes
 print "total_edges:", total_edges
 
 G_origin.add_weighted_edges_from(G_origin_lists)
+
 vm_active_list = G_origin.nodes()
 wcc = nx.connected_component_subgraphs(G_origin)
 
 result_G_nodes = []
-for sub_G in wcc:
-	print sub_G.nodes()
-	for node in sub_G.nodes():
-		result_G_nodes.append(node)
-
+while len(G_origin.nodes()) > 0:
+	vm_active_weight = {}
+	for vm in G_origin.nodes():
+		weight = 0
+		for edge in nx.all_neighbors(G_origin, vm):
+			weight += G_origin[vm][edge]['weight']
+		vm_active_weight[vm] = weight
+	
+	nodes_weight = sorted(vm_active_weight.iteritems(), key=lambda vm_active_weight:vm_active_weight[1], reverse=True)
+	print nodes_weight
+	result_G_nodes.append(nodes_weight[0][0])
+	G_origin.remove_node(nodes_weight[0][0])
 
 print "result_G_nodes", result_G_nodes
 print "len", len(result_G_nodes)
-write_lines_to_file(vm_active_list, "1_MC_BT_result/nodes_result.data")
+write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
 
 
 #draw_graph(G_origin)
