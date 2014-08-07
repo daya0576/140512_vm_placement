@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-"""
-weighted network
-"""
 import networkx as nx
 try:
 	import matplotlib.pyplot as plt
@@ -12,8 +8,6 @@ import sys
 
 result_G = []
 vm_flow_file = sys.argv[1]
-#"input/vm_flow_matrix/4Partitions@5percent.data"
-sort = 0
 total_edges = 0
 total_nodes = 0
 
@@ -108,6 +102,29 @@ def edges_to_weights(G):
 		
 	return edges_weight
 
+def draw_graph(G_origin):
+	elarge=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] >0.5]
+	esmall=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] <=0.5]
+	
+	pos=nx.spring_layout(G_origin) # positions for all nodes
+	
+	# nodes
+	nx.draw_networkx_nodes(G_origin,pos,node_size=300)
+	
+	# edges
+	nx.draw_networkx_edges(G_origin,pos,edgelist=elarge,
+	                    width=3)
+	nx.draw_networkx_edges(G_origin,pos,edgelist=esmall,
+	                    width=3,alpha=0.5,edge_color='b',style='dashed')
+	
+	# labels
+	nx.draw_networkx_labels(G_origin, pos, font_size=10, font_family='sans-serif')
+	
+	plt.axis('off')
+	plt.savefig("weighted_graph.png") # save as png
+	plt.show() # display
+
+
 
 #Initial G = (V, E)
 
@@ -135,26 +152,5 @@ print "len", len(result_G_nodes)
 write_lines_to_file(vm_active_list, "1_MC_BT_result/nodes_result.data")
 
 
-
-elarge=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] >0.5]
-esmall=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] <=0.5]
-
-pos=nx.spring_layout(G_origin) # positions for all nodes
-
-# nodes
-nx.draw_networkx_nodes(G_origin,pos,node_size=300)
-
-# edges
-nx.draw_networkx_edges(G_origin,pos,edgelist=elarge,
-                    width=3)
-nx.draw_networkx_edges(G_origin,pos,edgelist=esmall,
-                    width=3,alpha=0.5,edge_color='b',style='dashed')
-
-# labels
-nx.draw_networkx_labels(G_origin, pos, font_size=10, font_family='sans-serif')
-
-plt.axis('off')
-plt.savefig("weighted_graph.png") # save as png
-plt.show() # display
-
+#draw_graph(G_origin)
 
