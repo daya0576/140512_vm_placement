@@ -1,4 +1,5 @@
 import networkx as nx
+from igraph import Graph
 try:
 	import matplotlib.pyplot as plt
 except:
@@ -69,59 +70,67 @@ def vm_sum(VMlist_flow_list):
 			vm_all.append(vm_list[1])        
 	return len(vm_all)
 
+def gomory_hu_tree(graph, capacity=None, flow_attr="flow", copy_attrs=True):
+    """Calculates the Gomory-Hu tree of the given graph, assuming that the edge
+    capacities are given in `capacity`.
 
+    This implementation uses Gusfield's algorithm.
 
-def G_to_edges_and_weights(list_G):
-	G_weights = []
-	for G in list_G:
-		if(sum(edges_to_weights(G)) > 0):
-			result_tmp = []
-			result_tmp.append(G.edges()[0][0])
-			result_tmp.append(G.edges()[0][1])
-			result_tmp.append(sum(edges_to_weights(G)))
-			G_weights.append(result_tmp)
-	return G_weights
+    @param capacity: the vector of edge capacities. May be a list or the name
+      of an edge attribute.
+    @param flow_attr: the name of the edge attribute in the resulting graph that
+      will contain the minimum flow values
+    @param copy_attrs: whether to copy the graph and vertex attributes of the
+      original graph into the returned one
+    @return: the Gomory-Hu tree
+    """
+    n = graph.vcount()
 
-def G_to_weights(list_G):
-	G_weights = []
-	for G in list_G:
-		if(sum(edges_to_weights(G)) >= 0):
-			G_weights.append(sum(edges_to_weights(G)))
-	return G_weights
+    # Initialize the tree: every edge points to node 0
+    neighbors = [0] * n
+    flows = [0.0] * n
 
-def edges_to_weights(G):
-	edges = G.edges()
-	edges_weight = []
-	i = 0
-	for i in range(len(edges)):
-		edges_weight.append(G[edges[i][0]][edges[i][1]]['weight'])
-		
-	return edges_weight
+    # For each source vertex except vertex zero...
+    for s in xrange(1, n):
+        # Find its neighbor.
+        t = neighbors[s]
 
-def draw_graph(G_origin):
-	elarge=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] >0.5]
-	esmall=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] <=0.5]
-	
-	pos=nx.spring_layout(G_origin) # positions for all nodes
-	
-	# nodes
-	nx.draw_networkx_nodes(G_origin,pos,node_size=300)
-	
-	# edges
-	nx.draw_networkx_edges(G_origin,pos,edgelist=elarge,
-	                    width=3)
-	nx.draw_networkx_edges(G_origin,pos,edgelist=esmall,
-	                    width=3,alpha=0.5,edge_color='b',style='dashed')
-	
-	# labels
-	nx.draw_networkx_labels(G_origin, pos, font_size=10, font_family='sans-serif')
-	
-	plt.axis('off')
-	plt.savefig("weighted_graph.png") # save as png
-	plt.show() # display
+        # Find the minimum cut between s and t
+        cut = graph.mincut(s, t, capacity)
+        flows[s] = cut.value
+        side_of_s = cut[cut.membership[s]]
 
+        # Update the tree
+        for u in side_of_s:
+            if u > s and neighbors[u] == t:
+                neighbors[u] = s
 
+    # Construct the tree
+    edges = [(i, neighbors[i]) for i in xrange(1, n)]
+    result = Graph(n, edges, directed=False, edge_attrs={flow_attr: flows[1:]})
+    
+    # Copy the attributes if needed
+    if copy_attrs:
+        for attr in graph.attributes():
+            result[attr] = graph[attr]
+        for attr in graph.vertex_attributes():
+            result.vs[attr] = graph.vs[attr]
 
+    return result
+
+def xg_to_ig(xg):
+	weights = []
+
+	for edge in xg.edges():
+		weights.append(G_origin[edge[0]][edge[1]]['weight'])
+
+	ig = Graph(xg.edges())
+	ig.es["capacity"] = weights
+
+	return ig
+
+def ig_to_xg():
+	pass
 #Initial G = (V, E)
 
 G_origin = nx.Graph()
@@ -137,24 +146,21 @@ G_origin.add_weighted_edges_from(G_origin_lists)
 vm_active_list = G_origin.nodes()
 wcc = nx.connected_component_subgraphs(G_origin)
 
-result_G_nodes = []
-while len(G_origin.nodes()) > 0:
-	vm_active_weight = {}
-	for vm in G_origin.nodes():
-		weight = 0
-		for edge in nx.all_neighbors(G_origin, vm):
-			weight += G_origin[vm][edge]['weight']
-		vm_active_weight[vm] = weight
+for sub_G in wcc:
+	print sub_G.nodes()
+	print sub_G.edges()
+	print 
 	
-	nodes_weight = sorted(vm_active_weight.iteritems(), key=lambda vm_active_weight:vm_active_weight[1], reverse=True)
-	print nodes_weight
-	result_G_nodes.append(nodes_weight[0][0])
-	G_origin.remove_node(nodes_weight[0][0])
+	ig = xg_to_ig(sub_G)
+	for edge in ig.es:
+		print edge.tuple, edge['capacity']
+	print 
+	
+	gh = ig.gomory_hu_tree()
+	for edge in gh.es:
+		print edge.tuple, edge['flow']
+	print 
+	
+	exit()
 
-print "result_G_nodes", result_G_nodes
-print "len", len(result_G_nodes)
-write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
-
-
-#draw_graph(G_origin)
 
