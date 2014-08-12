@@ -75,12 +75,6 @@ def place_VM_in_PM(node, location):
 	PMlist[location].append(node)
 	PMlist_capacity[location][0] -= VMlist_cost[node][0]
 	PMlist_capacity[location][1] -= VMlist_cost[node][1]
-
-def init_VM_position():
-	VM_position = []
-	for i in range(pm_sum):
-		VM_position.append(-1)
-	return VM_position
 	
 '''
 Algorithms2 BF-HC algorithm
@@ -136,7 +130,7 @@ VM_flow_matrix = read_matrix(vm_flow_file)
 
 pm_sum = len(PMlist_distance)
 
-VM_to_PM = init_VM_position()
+VM_to_PM = [0] * 1024
 
 for PM in PMlist:
 	for VM in PM:

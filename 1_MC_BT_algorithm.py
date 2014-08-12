@@ -107,7 +107,6 @@ def domory_hu_tree_daya(G_origin):
     return gh_x
 
 def sort_weight_by_desperate(G_hu):
-    result_G_nodes = []
     vm_active_weight = {}
     for vm in G_hu.nodes():
         weight = 0
@@ -151,7 +150,7 @@ def test_gomory_hu():
 
     G_hu = domory_hu_tree_daya(G_origin)
     result_G_nodes = sort_weight_by_desperate(G_hu)
-    
+    #result_G_nodes = sort_weight_by(G_hu)
     write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
 
 if __name__ == "__main__" :

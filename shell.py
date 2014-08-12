@@ -2,7 +2,7 @@ import os
 
 file_dir = "input/vm_flow_matrix/"
 #file_list = os.listdir(file_dir)
-file_list = ["1Partition@15.data"]
+file_list = ["2Partitions@5percent.data"]
 
 for filename in file_list:
     print filename + "\ting....."
