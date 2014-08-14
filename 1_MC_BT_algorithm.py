@@ -4,6 +4,8 @@ import sys
 
 result_G = []
 vm_flow_file = sys.argv[1]
+sort_method = sys.argv[2]
+
 total_edges = 0
 total_nodes = 0
 
@@ -56,16 +58,6 @@ def file_lists_to_G_lists(file_lists):
                     
     return lines_new
 
-def vm_sum(VMlist_flow_list):
-    vm_all = []
-    for vm_list in VMlist_flow_list:
-        if vm_list[0] not in vm_all:
-            vm_all.append(vm_list[0])
-        if vm_list[1] not in vm_all:
-            vm_all.append(vm_list[1])        
-    return len(vm_all)
-
-
 def xg_to_ig(xg):
     print "-----------xg_to_ig------------"
     ig = Graph()
@@ -106,7 +98,7 @@ def domory_hu_tree_daya(G_origin):
     gh_x = gh_to_xg(gh)
     return gh_x
 
-def sort_weight_by_desperate(G_hu):
+def sort_weight_by(G_hu):
     vm_active_weight = {}
     for vm in G_hu.nodes():
         weight = 0
@@ -117,10 +109,23 @@ def sort_weight_by_desperate(G_hu):
     nodes_weight = sorted(vm_active_weight.iteritems(), key=lambda vm_active_weight:vm_active_weight[1], reverse=True)
     result_G_nodes = [node[0] for node in nodes_weight]
     
+    result_G_nodes1 = []
+    result_G_nodes2 = []
+    for node in result_G_nodes:
+        if result_G_nodes.index(node) % 2 == 1:
+            result_G_nodes1.append(node)
+        else:
+            result_G_nodes2.insert(0, node)
+    
+    print result_G_nodes
+    print result_G_nodes2
+    print result_G_nodes1
+    result_G_nodes = result_G_nodes2 + result_G_nodes1
     print "result_G_nodes", result_G_nodes
+    
     return result_G_nodes
 
-def sort_weight_by(G_hu):
+def sort_weight_by_iter(G_hu):
     result_G_nodes = []
     while len(G_hu.nodes()) > 0:
         vm_active_weight = {}
@@ -149,8 +154,20 @@ def test_gomory_hu():
     #wcc = nx.connected_component_subgraphs(G_origin)
 
     G_hu = domory_hu_tree_daya(G_origin)
-    result_G_nodes = sort_weight_by_desperate(G_hu)
-    #result_G_nodes = sort_weight_by(G_hu)
+    result_G_nodes = []
+    #result_G_nodes = sort_weight_by_iter(G_hu)
+    if "-a" in sort_method:
+        result_G_nodes = G_origin.nodes()
+    elif  "-n" in sort_method:
+        print "sort_weight_by(G_origin)"
+        result_G_nodes = sort_weight_by(G_origin)
+    elif "-h" in  sort_method:
+        result_G_nodes = sort_weight_by(G_hu)
+        print "sort_weight_by(G_hu)"
+    elif sort_method is 2:
+        pass   
+        
+    
     write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
 
 if __name__ == "__main__" :
