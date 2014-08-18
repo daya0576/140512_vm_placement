@@ -3,7 +3,8 @@ import os
 file_dir = "input/vm_flow_matrix/"
 #file_list = os.listdir(file_dir)
 file_list = ["1Partition@15.data"]
-methods = [" -a ", " -n ", " -h "]
+#methods = [" -a ", " -n ", " -h "]
+methods = [" -b "]
 
 for filename in file_list:
     for method in methods:
