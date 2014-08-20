@@ -2,9 +2,9 @@ import os
 
 file_dir = "input/vm_flow_matrix/"
 #file_list = os.listdir(file_dir)
-file_list = ["1Partition@15.data"]
-#methods = [" -a ", " -n ", " -h "]
-methods = [" -b "]
+file_list = ["5Partitions@5percent.data"]
+#methods = [" -a ", " -n ", " -h ", " -z "]
+methods = [" -z "]
 
 for filename in file_list:
     for method in methods:

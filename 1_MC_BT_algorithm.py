@@ -8,7 +8,7 @@ sort_method = sys.argv[2]
 
 total_edges = 0
 total_nodes = 0
-
+ 
 
 print "-------------algorithm1---------------"
 def lines_to_list(list_of_all_the_lines):
@@ -98,12 +98,12 @@ def domory_hu_tree_daya(G_origin):
     gh_x = gh_to_xg(gh)
     return gh_x
 
-def sort_weight_by(G_hu):
+def sort_weight_by(G_x):
     vm_active_weight = {}
-    for vm in G_hu.nodes():
+    for vm in G_x.nodes():
         weight = 0
-        for edge in nx.all_neighbors(G_hu, vm):
-            weight += G_hu[vm][edge]['weight']
+        for edge in nx.all_neighbors(G_x, vm):
+            weight += G_x[vm][edge]['weight']
         vm_active_weight[vm] = weight
     
     nodes_weight = sorted(vm_active_weight.iteritems(), key=lambda vm_active_weight:vm_active_weight[1], reverse=True)
@@ -142,18 +142,17 @@ def sort_weight_by_both(G_hu, G_origin):
     
     nodes = sorted(nodes_weight.iteritems(), key=lambda nodes_weight:nodes_weight[1], reverse=True)
     print nodes
-    
+
     return nodes
-    
-        
+          
 def sort_weight_by_iter(G_hu):
     result_G_nodes = []
     while len(G_hu.nodes()) > 0:
         vm_active_weight = {}
         for vm in G_hu.nodes():
             weight = 0
-            for edge in nx.all_neighbors(G_hu, vm):
-                weight += G_hu[vm][edge]['weight']
+            for node in nx.all_neighbors(G_hu, vm):
+                weight += G_hu[vm][node]['weight']
             vm_active_weight[vm] = weight
         
         nodes_weight = sorted(vm_active_weight.iteritems(), key=lambda vm_active_weight:vm_active_weight[1], reverse=True)
@@ -164,16 +163,36 @@ def sort_weight_by_iter(G_hu):
     print "result_G_nodes", result_G_nodes
     return result_G_nodes
 
-def daya_own_sort(G_origin):
-    node_positoin = {}
-    edges = G_origin.edges()
-    G_hu = domory_hu_tree_daya(G_origin)
-    nodes = [node[0] for node in sort_weight_by(G_hu)]
+result_G = []
+def sort_by_edge_and_tree(G_sub, std):
+    global result_G
     
-    node_positoin[nodes[0]] = 0
-    for node in nodes:
-        pass
+    edges = G_sub.edges()
+    for edge in edges:
+        edge_weight = G_sub[edge[0]][edge[1]]["weight"]
+        if edge_weight <= std:
+            #print edge, edge_weight
+            G_sub.remove_edge(edge[0], edge[1])
     
+    wcc = nx.connected_component_subgraphs(G_sub)
+    
+    G_index = result_G.index(G_sub)
+    result_G.remove(G_sub)
+    big_G_list = []
+    for G_rep in wcc:
+        result_G.insert(G_index, G_rep)
+        G_index += 1
+        
+        if len(G_rep.nodes()) > 3:
+            big_G_list.append(G_rep)
+            
+    #print [G_show.nodes() for G_show in result_G]
+    #print "len(result_G)", len(result_G)
+    
+    for G_big in big_G_list:
+        sort_by_edge_and_tree(G_big, (std+0.1)*2)
+
+
 def test_gomory_hu():
     #Initial G = (V, E)
     G_origin = nx.Graph()
@@ -210,8 +229,39 @@ def test_gomory_hu():
         print "sort_weight_by_both(G_hu, G_origin)"
         
     elif "-z" in sort_method:
-        daya_own_sort(G_origin)
-    
+        global result_G
+        '''print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
+        
+        for edge in G_hu.edges():
+            weight_G_hu = G_hu[edge[0]][edge[1]]["weight"]
+            
+            if int(edge[0]) < int(edge[1]):
+                edge_origin = (int(edge[0]), int(edge[1]))
+            else:
+                edge_origin = (int(edge[1]), int(edge[0]))
+            if edge_origin in G_origin.edges():
+                weight_G_origin = G_origin[edge_origin[0]][edge_origin[1]]["weight"]
+            else:
+                weight_G_origin = 0
+                
+            if weight_G_origin == 0:
+                G_hu[edge[0]][edge[1]]["weight"] = 0
+            else:
+                G_hu[edge[0]][edge[1]]["weight"] = weight_G_hu - weight_G_origin
+            
+        print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
+        '''
+        result_G = [G_hu]
+        sort_by_edge_and_tree(G_hu, 0)
+        
+        for G_sub in result_G:
+            result_G_nodes += G_sub.nodes()
+            
+        print "result_G_nodes:", result_G_nodes
+        print "len:", len(result_G_nodes)
+        print "sort_by_tree(G_hu, G_origin)"
+        
+        
     write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
 
 if __name__ == "__main__" :
