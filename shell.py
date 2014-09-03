@@ -9,6 +9,7 @@ methods = [" -z "]
 for filename in file_list:
     for method in methods:
         print filename + "\ting....."
+        print "method: " + method
         cmd1 = "h:/PYTHON26/python.exe 1_MC_BT_algorithm.py " + file_dir + filename + method
         #  + " > test/" + filename +"_test1.txt" 
         os.system(cmd1)

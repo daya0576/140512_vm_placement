@@ -1,5 +1,9 @@
 import networkx as nx
 from igraph import Graph
+try:
+    import matplotlib.pyplot as plt
+except:
+    raise
 import sys
 
 result_G = []
@@ -57,6 +61,28 @@ def file_lists_to_G_lists(file_lists):
                 total_edges += 1        
                     
     return lines_new
+
+def draw_graph(G_origin):
+    elarge=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] >0.5]
+    esmall=[(u,v) for (u,v,d) in G_origin.edges(data=True) if d['weight'] <=0.5]
+    
+    pos=nx.spring_layout(G_origin) # positions for all nodes
+    
+    # nodes
+    nx.draw_networkx_nodes(G_origin,pos,node_size=300)
+    
+    # edges
+    nx.draw_networkx_edges(G_origin,pos,edgelist=elarge,
+                        width=3)
+    nx.draw_networkx_edges(G_origin,pos,edgelist=esmall,
+                        width=3,alpha=0.5,edge_color='b',style='dashed')
+    
+    # labels
+    nx.draw_networkx_labels(G_origin, pos, font_size=10, font_family='sans-serif')
+    
+    plt.axis('off')
+    plt.savefig("weighted_graph.png") # save as png
+    plt.show() # display
 
 def xg_to_ig(xg):
     print "-----------xg_to_ig------------"
@@ -166,6 +192,9 @@ def sort_weight_by_iter(G_hu):
 result_G = []
 def sort_by_edge_and_tree(G_sub, std):
     global result_G
+    '''test'''
+    print "std", std
+    #draw_graph(G_sub)
     
     edges = G_sub.edges()
     for edge in edges:
@@ -186,12 +215,12 @@ def sort_by_edge_and_tree(G_sub, std):
         if len(G_rep.nodes()) > 3:
             big_G_list.append(G_rep)
             
-    #print [G_show.nodes() for G_show in result_G]
+    print [G_show.nodes() for G_show in result_G]
     #print "len(result_G)", len(result_G)
     
     for G_big in big_G_list:
-        sort_by_edge_and_tree(G_big, (std+0.1)*2)
-
+        sort_by_edge_and_tree(G_big, (std+0.03)*1.1)
+    
 
 def test_gomory_hu():
     #Initial G = (V, E)
@@ -251,6 +280,7 @@ def test_gomory_hu():
             
         print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
         '''
+        #draw_graph(G_hu)
         result_G = [G_hu]
         sort_by_edge_and_tree(G_hu, 0)
         
