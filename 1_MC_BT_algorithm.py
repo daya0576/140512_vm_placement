@@ -212,11 +212,13 @@ def sort_by_edge_and_tree(G_sub, std):
         result_G.insert(G_index, G_rep)
         G_index += 1
         
-        if len(G_rep.nodes()) > 3:
+        if len(G_rep.nodes()) > 4:
             big_G_list.append(G_rep)
             
     print [G_show.nodes() for G_show in result_G]
+    print [len(G_show.nodes()) for G_show in result_G]
     #print "len(result_G)", len(result_G)
+    #draw_graph(G_sub)
     
     for G_big in big_G_list:
         sort_by_edge_and_tree(G_big, (std+0.03)*1.1)
@@ -259,7 +261,7 @@ def test_gomory_hu():
         
     elif "-z" in sort_method:
         global result_G
-        '''print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
+        print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
         
         for edge in G_hu.edges():
             weight_G_hu = G_hu[edge[0]][edge[1]]["weight"]
@@ -279,7 +281,8 @@ def test_gomory_hu():
                 G_hu[edge[0]][edge[1]]["weight"] = weight_G_hu - weight_G_origin
             
         print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
-        '''
+        
+        exit()
         #draw_graph(G_hu)
         result_G = [G_hu]
         sort_by_edge_and_tree(G_hu, 0)
