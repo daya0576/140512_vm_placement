@@ -229,11 +229,13 @@ def test_gomory_hu():
     G_origin = nx.Graph()
     file_lists = read_lines_from_file(vm_flow_file)    
     G_origin_lists = file_lists_to_G_lists(file_lists)
-    print "total_nodes:", total_nodes
-    print "total_edges:", total_edges    
+    print G_origin_lists
     G_origin.add_weighted_edges_from(G_origin_lists)
     #wcc = nx.connected_component_subgraphs(G_origin)
-
+    print G_origin.nodes
+    print "total_nodes:", total_nodes
+    print "total_edges:", total_edges
+   
     G_hu = domory_hu_tree_daya(G_origin)
 
     result_G_nodes = []
@@ -248,16 +250,16 @@ def test_gomory_hu():
         print "result_G_nodes", result_G_nodes
         
     elif "-h" in  sort_method:
+        print "sort_weight_by(G_hu)"
         nodes_weight = sort_weight_by(G_hu)
         result_G_nodes = [node[0] for node in nodes_weight]
         print "result_G_nodes", result_G_nodes
-        print "sort_weight_by(G_hu)"
         
     elif "-b" in  sort_method:
+        print "sort_weight_by_both(G_hu, G_origin)"        
         nodes_weight = sort_weight_by_both(G_hu, G_origin)
         result_G_nodes = [node[0] for node in nodes_weight]
         print "result_G_nodes", result_G_nodes
-        print "sort_weight_by_both(G_hu, G_origin)"
         
     elif "-z" in sort_method:
         global result_G
@@ -281,8 +283,7 @@ def test_gomory_hu():
                 G_hu[edge[0]][edge[1]]["weight"] = weight_G_hu - weight_G_origin
             
         print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
-        
-        exit()
+
         #draw_graph(G_hu)
         result_G = [G_hu]
         sort_by_edge_and_tree(G_hu, 0)
@@ -294,13 +295,11 @@ def test_gomory_hu():
         print "len:", len(result_G_nodes)
         print "sort_by_tree(G_hu, G_origin)"
         
-        
     write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
-
+    
 if __name__ == "__main__" :
     test_gomory_hu()
-
-
+    
         
         
 
