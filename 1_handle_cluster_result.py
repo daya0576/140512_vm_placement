@@ -1,7 +1,7 @@
 import sys
 print "-------------algorithm1---------------"
-#mat_result_file = "input/cluster_result/" + sys.argv[1] + "_1024.data"
-mat_result_file = "input/cluster_result/test141106.data"
+mat_result_file = "input/cluster_result/" + sys.argv[1] + "_1024.data"
+#mat_result_file = "input/cluster_result/test141106.data"
 print mat_result_file
 
 def write_lines_to_file(result_G_nodes, filename):
@@ -65,6 +65,7 @@ def sort_nodes(binary_result):
     vms =  range(len(binary_result))
     #vms = [1, 2, 3, 4]
     for i in range(len(vms)):
+        print i
         for j in range(len(vms)-i-1):
             if next_lower(binary_result[j], binary_result[j+1]):
                 vms[j], vms[j + 1] = vms[j + 1], vms[j]
@@ -80,9 +81,12 @@ def test_matlab_result():
     cluster_result = [];
     for i in range(num_of_cuts):
         cluster_result.append([int(list1[i]) for list1 in file_lists]);
-        
+     
+    print "starting..."   
     binary_result = handle(cluster_result)
+    print "generate binary_result"
     
+    print "starting..." 
     result_G_nodes = sort_nodes(binary_result);
     print result_G_nodes
 

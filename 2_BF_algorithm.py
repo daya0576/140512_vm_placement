@@ -79,13 +79,13 @@ def place_VM_in_PM(node, location):
 '''
 Algorithms2 BF-HC algorithm
 '''		
-print "-------------algorithm2---------------"
+#print "-------------algorithm2---------------"
 vm_flow_file = sys.argv[1]
 #"input/vm_flow_matrix/4Partitions@5percent.data"
 nodes_result = read_line_from_file("1_MC_BT_result/nodes_result.data")
-print nodes_result
+
 nodes_sum = len(nodes_result)
-print "nodes_sum", nodes_sum
+#print "nodes_sum", nodes_sum
 pm_dist_file = "input/pm_distance/pm_distanc_1024.data"
 vm_cpu_mem_file = "input/vm_cost/Node1024_cpu0.5_men0.3_stdvar0.5"
 
@@ -121,7 +121,7 @@ for VM in VMlist:
 				VM_best_location = PMlist.index(PM)
 		place_VM_in_PM(VM, VM_best_location)
 	
-print PMlist
+#print PMlist
 
 
 '''compute (distace * flow)'''
@@ -136,7 +136,7 @@ for PM in PMlist:
 	for VM in PM:
 		VM_to_PM[VM] = PMlist.index(PM)
 
-print "VM_position", VM_to_PM
+#print "VM_position", VM_to_PM
 
 final_result = 0
 flow_sum = 0			
@@ -151,7 +151,7 @@ for VM1 in range(1024):
 	
 final_result /= 2
 print "sum(distace * flow):", final_result
-print "flow_sum", flow_sum/2
+#print "flow_sum", flow_sum/2
 
 
 

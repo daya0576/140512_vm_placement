@@ -1,5 +1,7 @@
-import networkx as nx
+import networkx as nx   
+from networkx.algorithms.connectivity import minimum_st_edge_cut
 from igraph import Graph
+import random
 try:
     import matplotlib.pyplot as plt
 except:
@@ -12,7 +14,6 @@ sort_method = sys.argv[2]
 
 total_edges = 0
 total_nodes = 0
- 
 
 print "-------------algorithm1---------------"
 def lines_to_list(list_of_all_the_lines):
@@ -170,26 +171,7 @@ def sort_weight_by_both(G_hu, G_origin):
     print nodes
 
     return nodes
-          
-def sort_weight_by_iter(G_hu):
-    result_G_nodes = []
-    while len(G_hu.nodes()) > 0:
-        vm_active_weight = {}
-        for vm in G_hu.nodes():
-            weight = 0
-            for node in nx.all_neighbors(G_hu, vm):
-                weight += G_hu[vm][node]['weight']
-            vm_active_weight[vm] = weight
-        
-        nodes_weight = sorted(vm_active_weight.iteritems(), key=lambda vm_active_weight:vm_active_weight[1], reverse=True)
-        #print nodes_weight
-        result_G_nodes.append(nodes_weight[0][0])
-        G_hu.remove_node(nodes_weight[0][0])
-    
-    print "result_G_nodes", result_G_nodes
-    return result_G_nodes
 
-result_G = []
 def sort_by_edge_and_tree(G_sub, std):
     global result_G
     '''test'''
@@ -223,46 +205,110 @@ def sort_by_edge_and_tree(G_sub, std):
     for G_big in big_G_list:
         sort_by_edge_and_tree(G_big, (std+0.03)*1.1)
     
+## MC_BT
+#While G has more than one node do mincut 
+def edges_to_weights(G):
+    edges = G.edges()
+    edges_weight = []
+    i = 0
+    for i in range(len(edges)):
+        edges_weight.append(G[edges[i][0]][edges[i][1]]['weight'])
+        
+    return edges_weight
+
+def G_to_nodes(list_G):
+    nodes = []
+    for G in list_G:
+        nodes += G.nodes()
+    return nodes
+
+def mincut_Graph(G, node):
+    global result_G
+    if(G.number_of_nodes() >= 2):
+                    
+        nodes_tmp = G.nodes()
+        souce_node = random.choice(nodes_tmp)
+        nodes_tmp.remove(souce_node)
+        sink_node = random.choice(nodes_tmp)
+        
+        mincut_edges = minimum_st_edge_cut(G, souce_node, sink_node)  
+        #print "cutted edges:", mincut_edges
+        
+        G.remove_edges_from(mincut_edges)
+
+        wcc = list(nx.connected_component_subgraphs(G))
+
+        if souce_node in wcc[0].nodes():
+            G1 = wcc[0]
+            G2 = wcc[1]
+        else:
+            G1 = wcc[1]
+            G2 = wcc[0]
+        
+        G1_weights = edges_to_weights(G1)
+        G1_weights_sum = sum(G1_weights)
+
+        G2_weights = edges_to_weights(G2)
+        G2_weights_sum = sum(G2_weights)
+                
+        if(G1_weights_sum > G2_weights_sum):
+            result_G.insert(result_G.index(G), G1)
+            result_G.insert(result_G.index(G) + 1, G2)
+        else:
+            result_G.insert(result_G.index(G) + 1, G1)
+            result_G.insert(result_G.index(G), G2)
+        
+        result_G.remove(G)    
+        
+        mincut_Graph(G1, souce_node)
+        mincut_Graph(G2, sink_node)
+        
+    else:
+        return
 
 def test_gomory_hu():
+    global result_G
+    
     #Initial G = (V, E)
     G_origin = nx.Graph()
     file_lists = read_lines_from_file(vm_flow_file)    
     G_origin_lists = file_lists_to_G_lists(file_lists)
-    print G_origin_lists
     G_origin.add_weighted_edges_from(G_origin_lists)
-    #wcc = nx.connected_component_subgraphs(G_origin)
-    print G_origin.nodes
-    print "total_nodes:", total_nodes
-    print "total_edges:", total_edges
-   
-    G_hu = domory_hu_tree_daya(G_origin)
+    
 
     result_G_nodes = []
-    #result_G_nodes = sort_weight_by_iter(G_hu)
     if "-a" in sort_method:
         result_G_nodes = G_origin.nodes()
+    
+    elif  "-m" in sort_method:    
+        print "sort_weight_by(MC_BT)"
+        wcc = nx.connected_component_subgraphs(G_origin)
+        for sub_G in wcc:
+            #print len(sub_G.edges())
+            result_G.append(sub_G)
+            mincut_Graph(sub_G, 0)
+            result_G_nodes = G_to_nodes(result_G)
         
     elif  "-n" in sort_method:
         print "sort_weight_by(G_origin)"
         nodes_weight = sort_weight_by(G_origin)
         result_G_nodes = [node[0] for node in nodes_weight]
-        print "result_G_nodes", result_G_nodes
         
     elif "-h" in  sort_method:
         print "sort_weight_by(G_hu)"
+        G_hu = domory_hu_tree_daya(G_origin)
         nodes_weight = sort_weight_by(G_hu)
         result_G_nodes = [node[0] for node in nodes_weight]
-        print "result_G_nodes", result_G_nodes
         
     elif "-b" in  sort_method:
-        print "sort_weight_by_both(G_hu, G_origin)"        
+        print "sort_weight_by_both(G_hu, G_origin)"  
+        G_hu = domory_hu_tree_daya(G_origin)      
         nodes_weight = sort_weight_by_both(G_hu, G_origin)
         result_G_nodes = [node[0] for node in nodes_weight]
-        print "result_G_nodes", result_G_nodes
         
     elif "-z" in sort_method:
-        global result_G
+        print "sort_by_tree(G_hu, G_origin)"
+        G_hu = domory_hu_tree_daya(G_origin)
         print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
         
         for edge in G_hu.edges():
@@ -282,7 +328,7 @@ def test_gomory_hu():
             else:
                 G_hu[edge[0]][edge[1]]["weight"] = weight_G_hu - weight_G_origin
             
-        print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
+        #print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
 
         #draw_graph(G_hu)
         result_G = [G_hu]
@@ -291,10 +337,10 @@ def test_gomory_hu():
         for G_sub in result_G:
             result_G_nodes += G_sub.nodes()
             
-        print "result_G_nodes:", result_G_nodes
-        print "len:", len(result_G_nodes)
-        print "sort_by_tree(G_hu, G_origin)"
-        
+        #print "result_G_nodes:", result_G_nodes
+        #print "len:", len(result_G_nodes)
+    
+    print "result_G_nodes", result_G_nodes    
     write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
     
 if __name__ == "__main__" :
