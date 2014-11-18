@@ -1,12 +1,13 @@
+import random
+import sys
+
 import networkx as nx   
 from networkx.algorithms.connectivity import minimum_st_edge_cut
 from igraph import Graph
-import random
 try:
     import matplotlib.pyplot as plt
 except:
     raise
-import sys
 
 result_G = []
 vm_flow_file = sys.argv[1]

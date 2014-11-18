@@ -69,7 +69,8 @@ def sort_nodes(binary_result):
         for j in range(len(vms)-i-1):
             if next_lower(binary_result[j], binary_result[j+1]):
                 vms[j], vms[j + 1] = vms[j + 1], vms[j]
-                binary_result[j] , binary_result[j+1] = binary_result[j+1] , binary_result[j]
+                binary_result[j] , binary_result[j+1] = \
+                binary_result[j+1] , binary_result[j]
     print binary_result
         #print vms
     return vms
@@ -90,7 +91,8 @@ def test_matlab_result():
     result_G_nodes = sort_nodes(binary_result);
     print result_G_nodes
 
-    write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
+    write_lines_to_file(result_G_nodes, 
+                        "1_MC_BT_result/nodes_result.data")
     
     
 if __name__ == "__main__" :
