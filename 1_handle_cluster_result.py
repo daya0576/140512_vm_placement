@@ -1,25 +1,29 @@
 import sys
-print "-------------algorithm1---------------"
+
+#print "-------------algorithm1---------------"
+print "algorithm1".center(40, '-')
+act_nodes_file = "1_MC_BT_result/nodes_activity.data"
 mat_result_file = "input/cluster_result/" + sys.argv[1] + "_1024.data"
 #mat_result_file = "input/cluster_result/test141106.data"
-print mat_result_file
 
 def write_lines_to_file(result_G_nodes, filename):
-    file_object = open(filename, 'w')
-    try:
+    with open(filename, 'w') as f:
         for result in result_G_nodes:
             result = str(result) + " "
-            file_object.write(result)
-        #simplejson.dump(result_G_nodes, file_object)
-    finally:
-        file_object.close()
+            f.write(result)
+
+def read_line_from_file(filename):
+    with open(filename) as f:
+        line_result = f.readlines()
+    
+    line = line_result[0].strip('\n').split(' ')
+    line_new = [int(i) for i in line if len(i)>0]
+    
+    return line_new
 
 def read_lines_from_file(filename):
-    file_object = open(filename)
-    try:
-        list_of_all_the_lines = file_object.readlines()
-    finally:
-        file_object.close()
+    with open(filename) as f:
+        list_of_all_the_lines = f.readlines()
 
     list_new = []
     for line in list_of_all_the_lines:
@@ -29,7 +33,7 @@ def read_lines_from_file(filename):
         #print line_int 
 
     return list_new
-    
+
 def handle(cluster_result):
     cluster_result.insert(0, [1]*len(cluster_result[0]));
     binary_result = ["1"]*len(cluster_result)
@@ -43,12 +47,12 @@ def handle(cluster_result):
             pre_node = cluster_result[k-1][index]
             if single_node != pre_node:
                 cut_node = pre_node
-                binary_result[index] += "2"
+                binary_result[index] += "1"
         for (index, single_node) in enumerate(single_result): 
             pre_node = cluster_result[k-1][index]  
             #print pre_node, single_node, cut_node       
             if cut_node == pre_node and cut_node == single_node:
-                binary_result[index] += "1"
+                binary_result[index] += "2"
         
     return binary_result
 
@@ -61,11 +65,10 @@ def next_lower(a, b):
         elif int(b[i]) > int(a[i]):
             return False
    
-def sort_nodes(binary_result):
+def sort_nodes(binary_result, avtivity_nodes):
     vms =  range(len(binary_result))
-    #vms = [1, 2, 3, 4]
+    
     for i in range(len(vms)):
-        print i
         for j in range(len(vms)-i-1):
             if next_lower(binary_result[j], binary_result[j+1]):
                 vms[j], vms[j + 1] = vms[j + 1], vms[j]
@@ -74,22 +77,40 @@ def sort_nodes(binary_result):
     print binary_result
         #print vms
     return vms
-     
+
+def sort_nodes1(binary_result, vms):
+    print vms
+    act_binary_result = [binary_result[node] for node in vms]
+    
+    for i in range(len(vms)):
+        for j in range(len(vms)-i-1):
+            if next_lower(act_binary_result[j], act_binary_result[j+1]):
+                vms[j], vms[j + 1] = vms[j + 1], vms[j]
+                act_binary_result[j] , act_binary_result[j+1] = \
+                act_binary_result[j+1] , act_binary_result[j]
+    
+    print act_binary_result
+    return vms
+
+    
 def test_matlab_result():
     print "sort_by_cluster(matlab)"
+    activity_nodes = read_line_from_file(act_nodes_file)  
+
     file_lists = read_lines_from_file(mat_result_file) 
     num_of_cuts = len(file_lists[0]);
     cluster_result = [];
     for i in range(num_of_cuts):
         cluster_result.append([int(list1[i]) for list1 in file_lists]);
      
-    print "starting..."   
+    print "generate binary_results..."   
     binary_result = handle(cluster_result)
-    print "generate binary_result"
+    print "done.."
     
+    #print binary_result
     print "starting..." 
-    result_G_nodes = sort_nodes(binary_result);
-    print result_G_nodes
+    result_G_nodes = sort_nodes1(binary_result, activity_nodes);
+    #print result_G_nodes
 
     write_lines_to_file(result_G_nodes, 
                         "1_MC_BT_result/nodes_result.data")

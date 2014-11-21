@@ -2,7 +2,7 @@ import os
 
 file_dir = "input/vm_flow_matrix/"
 #file_list = os.listdir(file_dir)
-file_list = ["2Partitions@5percent.data"]
+file_list = ["1Partitions@25percent.data"]
 
 #methods = [" -h "]
 methods = [" -a ", " -m ", " -n ", " -h ", " -b ", " -z "]
@@ -12,7 +12,7 @@ for filename in file_list:
     print filename + "\ting....."
 
     for method in methods:
-        print "\nmethod: " + method
+        print "method: " + method
         cmd1 = "h:/PYTHON26/python.exe 1_MC_BT_algorithm.py " + file_dir + filename + method + " > 1_MC_BT_result/test1.txt" 
         #  + " > test/" + filename +"_test1.txt" 
         os.system(cmd1)
@@ -22,8 +22,8 @@ for filename in file_list:
         os.system(cmd2)
 
 
-file_name = "2Partitions@5percent"
-print "\nmethod: -matlab"
+file_name = "1Partitions@25percent"
+print "method: -matlab"
 cmd12 = "h:/PYTHON26/python.exe 1_handle_cluster_result.py " + file_name + " > 1_MC_BT_result/test1.txt" 
 #  + " > test/" + filename +"_test1.txt" 
 os.system(cmd12)

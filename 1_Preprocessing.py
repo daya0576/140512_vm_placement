@@ -8,16 +8,16 @@ except:
 result_G = []
 #vm_flow_file = sys.argv[1]
 #vm_flow_file = "input/vm_flow_matrix/Inc_5Partition.data"
-percentage = 5
-filename = "2Partitions@" + str(percentage) + "percent"
+percentage = 25
+filename = "1Partitions@" + str(percentage) + "percent"
 vm_flow_file = "input/vm_flow_matrix/" + filename + ".data"
-vm_flow_file = "origin_generate/data/" + filename + ".data"
+#vm_flow_file = "origin_generate/data/" + filename + ".data"
 print vm_flow_file
 
 total_edges = 0
 total_nodes = 0
 
-print "-------------preprocessing---------------"
+print "-------------pre processing---------------"
 def lines_to_list(list_of_all_the_lines):
     list_new = []
     for line in list_of_all_the_lines:
@@ -29,11 +29,8 @@ def lines_to_list(list_of_all_the_lines):
     return list_new
 
 def read_lines_from_file(filename):
-    file_object = open(filename)
-    try:
-        list_of_all_the_lines = file_object.readlines()
-    finally:
-        file_object.close()
+    with open(filename, 'r') as f:  
+        list_of_all_the_lines = f.readlines()
             
     return lines_to_list(list_of_all_the_lines)
 
@@ -43,17 +40,12 @@ def WriteMatrixIntoFile(matrix,fileName):
             for ele in row:
                 fout.write(str(ele)+"\t")
             fout.write("\n")
-    fout.close
 
-def write_lines_to_file(result_G_nodes, filename):
-    file_object = open(filename, 'w')
-    try:
+def write_line_to_file(result_G_nodes, filename):
+    with open(filename, 'w') as f:
         for result in result_G_nodes:
             result = str(result) + " "
-            file_object.write(result)
-        #simplejson.dump(result_G_nodes, file_object)
-    finally:
-        file_object.close()
+            f.write(result)
 
 def file_lists_to_G_lists(file_lists):
     global total_edges, total_nodes
@@ -108,10 +100,12 @@ def pre_test():
     global total_nodes
     #Initial G = (V, E)
     G_origin = nx.Graph()
-    file_lists = read_lines_from_file(vm_flow_file)   
+    file_lists = read_lines_from_file(vm_flow_file)  
     G_origin_lists = file_lists_to_G_lists(file_lists)
     #print G_origin_lists
     G_origin.add_weighted_edges_from(G_origin_lists)
+    draw_graph(G_origin)
+    print G_origin.nodes()
     
     wcc = nx.connected_component_subgraphs(G_origin)
     
@@ -126,7 +120,7 @@ def pre_test():
     print "total_edges:", total_edges   
      
     print G_sub_nodes
-    draw_graph(G_origin)
+    #draw_graph(G_origin)
     #draw_graph(G_result[0])
     
     #G_result_matrix = geneateNewMatrix(G_origin_lists, G_result[0].nodes())    

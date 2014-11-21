@@ -28,23 +28,16 @@ def lines_to_list(list_of_all_the_lines):
     return list_new
 
 def read_lines_from_file(filename):
-    file_object = open(filename)
-    try:
-        list_of_all_the_lines = file_object.readlines()
-    finally:
-        file_object.close()
+    with open(filename) as f:
+        list_of_all_the_lines = f.readlines()
             
     return lines_to_list(list_of_all_the_lines)
 
-def write_lines_to_file(result_G_nodes, filename):
-    file_object = open(filename, 'w')
-    try:
+def write_line_to_file(result_G_nodes, filename):
+    with open(filename, 'w') as f:
         for result in result_G_nodes:
             result = str(result) + " "
-            file_object.write(result)
-        #simplejson.dump(result_G_nodes, file_object)
-    finally:
-        file_object.close()
+            f.write(result)
 
 def file_lists_to_G_lists(file_lists):
     global total_edges, total_nodes
@@ -275,7 +268,7 @@ def test_gomory_hu():
     file_lists = read_lines_from_file(vm_flow_file)    
     G_origin_lists = file_lists_to_G_lists(file_lists)
     G_origin.add_weighted_edges_from(G_origin_lists)
-    
+    activity_nodes = G_origin.nodes()
 
     result_G_nodes = []
     if "-a" in sort_method:
@@ -342,7 +335,8 @@ def test_gomory_hu():
         #print "len:", len(result_G_nodes)
     
     print "result_G_nodes", result_G_nodes    
-    write_lines_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
+    write_line_to_file(activity_nodes, "1_MC_BT_result/nodes_activity.data")
+    write_line_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
     
 if __name__ == "__main__" :
     test_gomory_hu()
