@@ -77,7 +77,7 @@ nodes_result = read_line_from_file("1_MC_BT_result/nodes_result.data")
 
 
 nodes_sum = len(nodes_result)
-print "nodes_sum", nodes_sum
+#print "nodes_sum", nodes_sum
 
 pm_dist_file = "input/pm_distance/pm_distanc_1024.data"
 vm_cpu_mem_file = "input/vm_cost/Node1024_cpu0.5_men0.3_stdvar0.5"
@@ -128,7 +128,7 @@ for PM in PMlist:
 	for VM in PM:
 		VM_to_PM[VM] = PMlist.index(PM)
 
-#print "VM_position", VM_to_PM
+print "VM_position", VM_to_PM
 #print len(VM_to_PM)
 
 final_result = 0

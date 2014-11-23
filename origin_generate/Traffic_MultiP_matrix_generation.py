@@ -55,7 +55,7 @@ def WriteMatrixIntoFile(matrix,pNum,percentage):
             fout.write("\n")
 
 #OUTPUT SEG
-for pNum in range(2,3):
+for pNum in range(1,2):
     print("pNum="+str(pNum))
     for percentage in [5,15,25,35]:
         print("percentage="+str(percentage))
