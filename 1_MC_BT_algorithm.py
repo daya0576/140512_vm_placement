@@ -1,9 +1,10 @@
 import random
 import sys
-
-import networkx as nx   
-from networkx.algorithms.connectivity import minimum_st_edge_cut
-from igraph import Graph
+  
+import networkx as nx  
+#from networkx.algorithms.flow import shortest_augmenting_path
+#from networkx.algorithms.connectivity import minimum_st_edge_cut
+from igraph import Graph 
 try:
     import matplotlib.pyplot as plt
 except:
@@ -225,7 +226,7 @@ def mincut_Graph(G, node):
         nodes_tmp.remove(souce_node)
         sink_node = random.choice(nodes_tmp)
         
-        mincut_edges = minimum_st_edge_cut(G, souce_node, sink_node)  
+        mincut_edges = nx.minimum_st_edge_cut(G, souce_node, sink_node, capacity='weight')        
         #print "cutted edges:", mincut_edges
         
         G.remove_edges_from(mincut_edges)
@@ -272,16 +273,18 @@ def test_gomory_hu():
 
     result_G_nodes = []
     if "-a" in sort_method:
-        result_G_nodes = G_origin.nodes()
+        wcc = nx.connected_component_subgraphs(G_origin)
+        for sub_G in wcc:
+            result_G_nodes += sub_G.nodes()
     
     elif  "-m" in sort_method:    
         print "sort_weight_by(MC_BT)"
-        wcc = nx.connected_component_subgraphs(G_origin)
-        for sub_G in wcc:
+        #wcc = nx.connected_component_subgraphs(G_origin)
+        #for sub_G in wcc:
             #print len(sub_G.edges())
-            result_G.append(sub_G)
-            mincut_Graph(sub_G, 0)
-            result_G_nodes = G_to_nodes(result_G)
+        result_G.append(G_origin)
+        mincut_Graph(G_origin, 0)
+        result_G_nodes = G_to_nodes(result_G)
         
     elif  "-n" in sort_method:
         print "sort_weight_by(G_origin)"
@@ -296,7 +299,7 @@ def test_gomory_hu():
         
     elif "-b" in  sort_method:
         print "sort_weight_by_both(G_hu, G_origin)"  
-        G_hu = domory_hu_tree_daya(G_origin)      
+        G_hu = domory_hu_tree_daya(G_origin)
         nodes_weight = sort_weight_by_both(G_hu, G_origin)
         result_G_nodes = [node[0] for node in nodes_weight]
         
@@ -334,9 +337,15 @@ def test_gomory_hu():
         #print "result_G_nodes:", result_G_nodes
         #print "len:", len(result_G_nodes)
     
-    print "result_G_nodes", result_G_nodes    
+    print "result_G_nodes", result_G_nodes 
+    
     write_line_to_file(activity_nodes, "1_MC_BT_result/nodes_activity.data")
     write_line_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
+    
+    result_G_nodes_1024 = [i for i in range(1024) if i not in result_G_nodes]
+    result_G_nodes_1024 = result_G_nodes + result_G_nodes_1024
+    write_line_to_file(result_G_nodes_1024, "1_MC_BT_result/nodes_result.data")
+    
     
 if __name__ == "__main__" :
     test_gomory_hu()

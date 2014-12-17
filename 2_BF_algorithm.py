@@ -1,3 +1,7 @@
+'''
+python + " 2_BF_algorithm.py " + fileLoc + pmType + " >> " + resultLoc
+
+'''
 import sys
 
 def read_line_from_file(filename):
@@ -23,20 +27,14 @@ def lines_to_list(list_of_all_the_lines):
 		
 	return list_new
 
-def read_lines_from_file(filename):
-	file_object = open(filename)
-	try:
-		lines = file_object.readlines()
-	finally:
-		file_object.close()
-	
-	return lines
-
 def read_matrix(filename):
-	return lines_to_list(read_lines_from_file(filename))
+	with open(filename) as file_object:
+		lines = file_object.readlines()
+	return lines_to_list(lines)
 
 def read_cpu_mem_from_file(filename):
-	lines = read_lines_from_file(filename)
+	with open(filename) as file_object:
+		lines = file_object.readlines()
 	lines_new = []
 	for line in lines:
 		line.replace("\t", " ")
@@ -48,6 +46,12 @@ def read_cpu_mem_from_file(filename):
 		
 		lines_new.append(line_new)
 	return lines_new	
+
+def write_line_to_file(result_G_nodes, filename):
+	with open(filename, 'w') as f:
+		for result in result_G_nodes:
+			result = str(result) + " "
+			f.write(result)
 
 def init_PMlist():
 	PMlist = []
@@ -75,19 +79,22 @@ vm_flow_file = sys.argv[1]
 #"input/vm_flow_matrix/4Partitions@5percent.data"
 nodes_result = read_line_from_file("1_MC_BT_result/nodes_result.data")
 
-
 nodes_sum = len(nodes_result)
 #print "nodes_sum", nodes_sum
 
 pm_dist_file = "input/pm_distance/pm_distanc_1024.data"
-vm_cpu_mem_file = "input/vm_cost/Node1024_cpu0.5_men0.3_stdvar0.5"
+vm_cpu_mem_file = sys.argv[2]
+#vm_cpu_mem_file = "input/vm_cost/Node1024_cpu0.5_men0.3_stdvar0.5"
 
-PM_capacity_cpu = 1
-PM_capacity_mem = 1
+PM_capacity_cpu = 1.0
+PM_capacity_mem = 1.0
 PM_cpu_weight = 1.0
 PM_capacity = PM_capacity_cpu * PM_cpu_weight + PM_capacity_mem
 
 VMlist = nodes_result
+#VMlist = range(1024)
+print "len(nodes_result):", len(nodes_result)
+
 PMlist = init_PMlist()
 VMlist_cost = read_cpu_mem_from_file(vm_cpu_mem_file)
 PMlist_capacity = init_PMlist_capacity()
@@ -103,19 +110,20 @@ for VM in VMlist:
 		VM_cost_cpu = VMlist_cost[VM][0]
 		VM_cost_mem = VMlist_cost[VM][1]
 		PM_best_capacity_left = PM_capacity
-		VM_best_locate = 0
-
+		VM_best_location = 0
+		
+		
 		for PM in PMlist:
 			PM_cpu_left = PMlist_capacity[PMlist.index(PM)][0] - VM_cost_cpu
 			PM_mem_left = PMlist_capacity[PMlist.index(PM)][1] - VM_cost_mem
 			PM_sum_left = PM_cpu_left * PM_cpu_weight + PM_mem_left
-			if(PM_cpu_left >= 0 and PM_mem_left >= 0 
+			if(PM_cpu_left >= 0 and PM_mem_left >= 0
 			      and PM_sum_left < PM_best_capacity_left):
 				PM_best_capacity_left = PM_sum_left
 				VM_best_location = PMlist.index(PM)
 		place_VM_in_PM(VM, VM_best_location)
 	
-#print PMlist
+#print 
 
 
 '''compute (distace * flow)'''
@@ -127,8 +135,13 @@ VM_to_PM = [0] * 1024
 for PM in PMlist:
 	for VM in PM:
 		VM_to_PM[VM] = PMlist.index(PM)
+'''
+for i, vm in enumerate(VMlist):
+	VM_to_PM[vm] = i
+'''
 
 print "VM_position", VM_to_PM
+write_line_to_file(VM_to_PM, "1_MC_BT_result/tubo_solution.data")
 #print len(VM_to_PM)
 
 final_result = 0
@@ -147,35 +160,16 @@ print "sum(distace * flow):", final_result
 #print "flow_sum", flow_sum/2
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+''' show final PMlist situation '''
+final_cpu_result = [0]*1024
+final_mem_result = [0]*1024
+for i, vms in enumerate(PMlist):
+	for vm in vms:
+		final_cpu_result[i] += VMlist_cost[vm][0]
+		final_mem_result[i] += VMlist_cost[vm][1]
+		
+print final_cpu_result
+print final_mem_result
 
 
 

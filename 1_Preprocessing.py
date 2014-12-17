@@ -8,9 +8,9 @@ except:
 result_G = []
 #vm_flow_file = sys.argv[1]
 #vm_flow_file = "input/vm_flow_matrix/Inc_5Partition.data"
-percentage = 5
+percentage = 2
 filename = "2Partitions@" + str(percentage) + "percent"
-vm_flow_file = "input/vm_flow_matrix/" + filename + ".data"
+vm_flow_file = "origin_generate/data/" + filename + ".data"
 #vm_flow_file = "origin_generate/data/" + filename + ".data"
 print vm_flow_file
 
