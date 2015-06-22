@@ -1,17 +1,21 @@
 import networkx as nx
 import numpy as np
+import sys
+
 try:
     import matplotlib.pyplot as plt
 except:
     raise
 
 result_G = []
-#vm_flow_file = sys.argv[1]
+vm_flow_file = sys.argv[1]
 #vm_flow_file = "input/vm_flow_matrix/Inc_5Partition.data"
-percentage = 2
-filename = "2Partitions@" + str(percentage) + "percent"
-vm_flow_file = "origin_generate/data/" + filename + ".data"
-#vm_flow_file = "origin_generate/data/" + filename + ".data"
+# percentage = 5
+# filename = "1Partitions@" + str(percentage) + "percent"
+# vm_flow_file = "origin_generate/data/" + filename + ".data"
+# vm_flow_file = vm_flow_file + ".data"
+
+vm_flow_file = "origin_generate/data//2Partitions@1percent.data"
 print vm_flow_file
 
 total_edges = 0
@@ -79,6 +83,14 @@ def draw_graph(G_origin):
                         width=3)
     nx.draw_networkx_edges(G_origin,pos,edgelist=esmall,
                         width=3,alpha=0.5,edge_color='b',style='dashed')
+    
+    edgewidth=[]
+    for (u,v,d) in G_origin.edges(data=True):
+        edgewidth.append(round(G_origin.get_edge_data(u,v).values()[0],2))
+    print edgewidth
+    
+#     nx.draw_networkx_edges(G_origin,pos,width=edgewidth) 
+#     nx.draw_networkx_edge_labels(G_origin, pos, font_size=10, font_family='sans-serif')
     
     # labels
     nx.draw_networkx_labels(G_origin, pos, font_size=10, font_family='sans-serif')

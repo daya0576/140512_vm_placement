@@ -42,7 +42,7 @@ def GenCostMatrixTree():
     return matrix
  
 def WriteMatrixIntoFile(matrix,fileName):
-    with open(fileName, mode = "w", encoding = "utf-8") as fout:
+    with open(fileName, 'w') as fout:
         for row in matrix:
             for ele in row:
                 fout.write(str(ele))

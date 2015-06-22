@@ -1,7 +1,6 @@
 import sys
 from btree.btree_test import Node
 from btree.node_data import NodeData
-import time
 import common_funs.comm_funs as comm
 #print time.time()
 
@@ -18,14 +17,15 @@ act_nodes_file = "1_MC_BT_result/nodes_activity.data"
 mat_result_file = "input/cluster_result/test_daya1_ncut_1024.data"
 vm_cpu_mem_file = "input/vm_cost/Node7"
 '''
+
 N = 1024
-vm_flow_file = "origin_generate/data/2Partitions@13percent.data "
-#mat_result_file = "input/cluster_result/" + sys.argv[1] + "_1024.data"
-mat_result_file = "input/cluster_result/" + "2Partitions@13percent_ncut" + "_1024.data"
+vm_flow_file = sys.argv[2] 
+mat_result_file = "input/cluster_result/" + sys.argv[1] + "_1024.data"
+#mat_result_file = "input/cluster_result/" + "5Partitions@25percent_ncut" + "_1024.data"
 vm_cpu_mem_file = "input/vm_cost/Node1024_cpu0.2_men0.2_stdvar1"
 print mat_result_file
 print vm_cpu_mem_file
-
+ 
 
 def write_lines_to_file(result_G_nodes, filename):
     with open(filename, 'w') as f:
@@ -118,7 +118,7 @@ def generate_cluster():
     cluster_result = [];
     for i in range(num_of_cuts):
         cluster_result.append(
-            [int(list1[i])for list1 in file_lists]);
+            [int(list1[i]) for list1 in file_lists]);
     
     return cluster_result
 
@@ -271,7 +271,6 @@ def init_PMlist_capacity(PM_capacity_cpu, PM_capacity_mem, pm_num):
     for i in xrange(pm_num):
         PMlist_capicity.append([PM_capacity_cpu, PM_capacity_mem])
     return PMlist_capicity
-
   
 def Pod_best_fit(VMlist, VMlist_cost, pm_num):
     PM_capacity_cpu = 1.0
@@ -384,16 +383,25 @@ def test_matlab_result():
     
     print "generate binary_results..."   
     binary_result, vms_root = handle(cluster_result, vms_root, VMlist_cost, VM_flow_matrix, activity_nodes)
+    
     #vms_root.delete("1")
-    print "print tree(all nodes):",
+    #print "print tree(all nodes):",
     #vms_root.print_tree()
-    print "\nprint tree(midTraverse):",
+    #print "\nprint tree(midTraverse):",
     #vms_root.midTraverse()
+    print "writing tree to file..."
     vms_root.printbittree(0)
     
     print "\ndepth", vms_root.get_depth()
+    result_G_nodes = vms_root.get_ordered_vms()
+    comm.write_line_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
+    print result_G_nodes
+    print "writing result_G_nodes to file..."
+    sys.exit()
+    
     
     # origin
+    print "place vm to pm origin..."
     VM_to_PM = cal_VM_to_PM_origin(VMlist_cost, vms_root)
     #print VM_to_PM
     final_result = cal_final_result(VM_flow_matrix, PMlist_distance, VM_to_PM)    
@@ -408,11 +416,11 @@ def test_matlab_result():
     #vms_root.printbittree(0)
     VM_to_PM = cal_VM_to_PM(hier_solution, VMlist_cost)
     #print "VM_to_PM:", VM_to_PM
-    final_result = cal_final_result(VM_flow_matrix, PMlist_distance, VM_to_PM)    
-    print "sum(distace * flow):", final_result
-
-
     
+    final_result = cal_final_result(VM_flow_matrix, PMlist_distance, VM_to_PM)    
+    print "sum(distace * flow):", final_result                                                              
+
+
 if __name__ == "__main__" :
     test_matlab_result()
     

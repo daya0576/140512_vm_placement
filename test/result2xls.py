@@ -1,7 +1,8 @@
 import re
 import xlwt
 import os
-
+import time
+local_date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
 
 fileList = ['1Partitions@15percent', '1Partitions@5percent',
              '2Partitions@15percent', '2Partitions@5percent',
@@ -13,8 +14,8 @@ pmTypes = ["Node1024_cpu0.5_men0.3_stdvar1",
            "Node1024_cpu0.5_men0.5_stdvar1", 
            "Node1024_cpu0.2_men0.2_stdvar1"]
 
-def read_line_from_file(filename):
-    with open(filename + "_test1.txt") as f:
+def read_line_from_file(os_path):
+    with open(os_path) as f:
         line_result = f.readlines()
     
     return line_result
@@ -34,25 +35,26 @@ def findAllResult(souceFile):
             
     return xls_lists    
 
-
 def handleXLSFile(fileList):
     wfile = xlwt.Workbook()
     table = wfile.add_sheet("1")
     
     for k, souceFile in enumerate(fileList):
-        xls_lists = findAllResult(souceFile)
-        table.write(0+k*4, 0, souceFile)
-        for i in range(len(pmTypes)):
-            #print pmTypes[i][9:22]
-            table.write(i+1+k*4, 0, pmTypes[i][9:22])
-        for j in range(len(methods)):
-            table.write(0+k*4, j+1, methods[j])
-        for i, line in enumerate(xls_lists):
+        os_path = local_date + "/" + souceFile + "_test.txt"
+        if os.path.exists(os_path):
+            xls_lists = findAllResult(os_path)
+            table.write(0+k*4, 0, souceFile)
+            for i in range(len(pmTypes)):
+                #print pmTypes[i][9:22]
+                table.write(i+1+k*4, 0, pmTypes[i][9:22])
+            for j in range(len(methods)):
+                table.write(0+k*4, j+1, methods[j])
+            for i, line in enumerate(xls_lists):
+                
+                for j, result in enumerate(line):
+                    table.write(i+1+k*4, j+1, result)
             
-            for j, result in enumerate(line):
-                table.write(i+1+k*4, j+1, result)
-            
-    wfile.save("xls_results/test1_all.xls")
+    wfile.save(local_date + "/test_all_" + local_date + ".xls")
             
             
 if __name__ == "__main__" :

@@ -1,6 +1,6 @@
 import random
 import sys
-  
+import common_funs.comm_funs as comm
 import networkx as nx  
 #from networkx.algorithms.flow import shortest_augmenting_path
 #from networkx.algorithms.connectivity import minimum_st_edge_cut
@@ -33,12 +33,6 @@ def read_lines_from_file(filename):
         list_of_all_the_lines = f.readlines()
             
     return lines_to_list(list_of_all_the_lines)
-
-def write_line_to_file(result_G_nodes, filename):
-    with open(filename, 'w') as f:
-        for result in result_G_nodes:
-            result = str(result) + " "
-            f.write(result)
 
 def file_lists_to_G_lists(file_lists):
     global total_edges, total_nodes
@@ -111,7 +105,7 @@ def gh_to_xg(gh):
     
     return G_origin
 
-def domory_hu_tree_daya(G_origin):
+def gomory_hu_tree_daya(G_origin):
     ig = xg_to_ig(G_origin)
     
     print "-----------generate gomory_hu_tree-------------"
@@ -230,7 +224,8 @@ def mincut_Graph(G, node):
         #print "cutted edges:", mincut_edges
         
         G.remove_edges_from(mincut_edges)
-
+        #draw_graph(G)
+        
         wcc = list(nx.connected_component_subgraphs(G))
 
         if souce_node in wcc[0].nodes():
@@ -250,6 +245,7 @@ def mincut_Graph(G, node):
             result_G.insert(result_G.index(G), G1)
             result_G.insert(result_G.index(G) + 1, G2)
         else:
+            
             result_G.insert(result_G.index(G) + 1, G1)
             result_G.insert(result_G.index(G), G2)
         
@@ -270,7 +266,9 @@ def test_gomory_hu():
     G_origin_lists = file_lists_to_G_lists(file_lists)
     G_origin.add_weighted_edges_from(G_origin_lists)
     activity_nodes = G_origin.nodes()
-
+    
+    #draw_graph(G_origin)
+    
     result_G_nodes = []
     if "-a" in sort_method:
         wcc = nx.connected_component_subgraphs(G_origin)
@@ -293,19 +291,22 @@ def test_gomory_hu():
         
     elif "-h" in  sort_method:
         print "sort_weight_by(G_hu)"
-        G_hu = domory_hu_tree_daya(G_origin)
-        nodes_weight = sort_weight_by(G_hu)
-        result_G_nodes = [node[0] for node in nodes_weight]
+        draw_graph(G_origin)
+        G_hu = gomory_hu_tree_daya(G_origin)
+        draw_graph(G_hu)
+#         nodes_weight = sort_weight_by(G_hu)
+#         result_G_nodes = [node[0] for node in nodes_weight]
+        result_G_nodes = G_hu.nodes()
         
     elif "-b" in  sort_method:
         print "sort_weight_by_both(G_hu, G_origin)"  
-        G_hu = domory_hu_tree_daya(G_origin)
+        G_hu = gomory_hu_tree_daya(G_origin)
         nodes_weight = sort_weight_by_both(G_hu, G_origin)
         result_G_nodes = [node[0] for node in nodes_weight]
         
     elif "-z" in sort_method:
         print "sort_by_tree(G_hu, G_origin)"
-        G_hu = domory_hu_tree_daya(G_origin)
+        G_hu = gomory_hu_tree_daya(G_origin)
         print [[edge[0], edge[1], G_hu[edge[0]][edge[1]]["weight"]]for edge in G_hu.edges()]
         
         for edge in G_hu.edges():
@@ -337,20 +338,18 @@ def test_gomory_hu():
         #print "result_G_nodes:", result_G_nodes
         #print "len:", len(result_G_nodes)
     
-    print "result_G_nodes", result_G_nodes 
+    print "result_G_nodes:", result_G_nodes 
+    print "len(result_G_nodes): ", len(result_G_nodes) 
     
-    write_line_to_file(activity_nodes, "1_MC_BT_result/nodes_activity.data")
-    write_line_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
+    comm.write_line_to_file(activity_nodes, "1_MC_BT_result/nodes_activity.data")
+    comm.write_line_to_file(result_G_nodes, "1_MC_BT_result/nodes_result.data")
     
-    result_G_nodes_1024 = [i for i in range(1024) if i not in result_G_nodes]
-    result_G_nodes_1024 = result_G_nodes + result_G_nodes_1024
-    write_line_to_file(result_G_nodes_1024, "1_MC_BT_result/nodes_result.data")
+#     result_G_nodes_1024 = [i for i in range(1024) if i not in result_G_nodes]
+#     result_G_nodes_1024 = result_G_nodes + result_G_nodes_1024
+#     comm.write_line_to_file(result_G_nodes_1024, "1_MC_BT_result/nodes_result.data")
     
     
 if __name__ == "__main__" :
     test_gomory_hu()
     
-        
-        
-
 

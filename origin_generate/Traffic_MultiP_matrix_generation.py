@@ -58,7 +58,7 @@ def WriteMatrixIntoFile(matrix,pNum,percentage):
 for pNum in [2]:
     print("pNum="+str(pNum))
     #for percentage in [5,15,25,35]:
-    for percentage in [12]:
+    for percentage in [2, 1, 0.5]:
         print("percentage="+str(percentage))
         WriteMatrixIntoFile(GenTrafficMatrix(1024,0,pNum,percentage),pNum,percentage)
         

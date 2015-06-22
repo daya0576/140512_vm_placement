@@ -101,9 +101,15 @@ class Node:
             self.right.printbittree(n+1)
     
     def print_node(self, n):
+        if self.data.flow_sum[0] == 0:
+            radio_cut = 1
+        else:
+            radio_cut = self.data.intra_flow/self.data.flow_sum[0]
+        
         with open("btree/tree_result.data", mode = "a") as fout:
             fout.write("  " * 8*n + str(len(self.data.vms)) + "(" + 
                        str(len(self.data.order)) + ", " +  
+                       str("%.1f"%radio_cut) + ", " + 
                        str("%.1f"%self.data.intra_flow) + ", " + 
                        str("%.1f"%self.data.flow_sum[0]) + ", " + 
                        str("%.1f"%self.data.flow_sum[1]) + ", " + 

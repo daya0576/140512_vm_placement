@@ -39,7 +39,7 @@ def WriteMatrixIntoFile(matrix,fileName):
 
 
 #OUTPUT SEG
-for PNNum in [128]:
+for PNNum in [1024]:
     print("")
     for sourceFile in os.listdir("data\\"):
         print("start processing file:" + sourceFile + " with PN number:" + str(PNNum))
