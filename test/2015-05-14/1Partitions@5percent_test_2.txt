@@ -1,0 +1,84 @@
+-a: vm按序号排列， 子图分开
+-m: MC_BF
+-n: vm nodes权重 
+-h: sort_weight_by(Gomory Hu Tree)
+-b: sort_weight_by_both(G_hu, G_origin)
+ -z: zcj method
+
+1Partitions@5percent	ing.....
+
+Node1024_cpu0.2_men0.2_stdvar1	ing.....
+
+method:  -m 
+
+Best fit: 
+sum(distace * flow):3740.2
+3. Average Hops per Flow: 1.92245119306
+2. Core: 0 /Aggregate: 933.6 /Edge:939.4
+3. pm_sum: 15
+tabu search: Average cost: 3644.000000, Solution result: 3644.304199
+sum(distace * flow):3644.3
+3. Average Hops per Flow: 1.88882863341
+2. Core: 0 /Aggregate: 897.0 /Edge:953.3
+3. pm_sum: 15
+
+First fit: 
+sum(distace * flow):4132.3
+3. Average Hops per Flow: 2.1057483731
+2. Core: 0 /Aggregate: 1114.1 /Edge:790.0
+3. pm_sum: 18
+tabu search: Average cost: 3603.000000, Solution result: 3607.703369
+sum(distace * flow):3607.7
+3. Average Hops per Flow: 1.86767895879
+2. Core: 0 /Aggregate: 879.1 /Edge:970.4
+3. pm_sum: 17
+
+method:  -h 
+
+Best fit: 
+sum(distace * flow):3696.3
+3. Average Hops per Flow: 1.87472885033
+2. Core: 0 /Aggregate: 906.5 /Edge:976.8
+3. pm_sum: 15
+tabu search: Average cost: 3691.000000, Solution result: 3691.402100
+sum(distace * flow):3691.4
+3. Average Hops per Flow: 1.87418655098
+2. Core: 0 /Aggregate: 906.5 /Edge:971.9
+3. pm_sum: 15
+
+First fit: 
+sum(distace * flow):4025.7
+3. Average Hops per Flow: 1.97613882863
+2. Core: 0 /Aggregate: 1058.3 /Edge:850.8
+3. pm_sum: 16
+tabu search: Average cost: 3692.000000, Solution result: 3710.603271
+sum(distace * flow):3710.6
+3. Average Hops per Flow: 1.8953362256
+2. Core: 0 /Aggregate: 917.6 /Edge:957.8
+3. pm_sum: 16
+
+method: -matlab _ncc
+
+Best fit: 
+sum(distace * flow):3702.2
+3. Average Hops per Flow: 1.91648590022
+2. Core: 0 /Aggregate: 921.3 /Edge:938.3
+3. pm_sum: 15
+tabu search: Average cost: 1022.000000, Solution result: 3579.402832
+sum(distace * flow):3579.4
+3. Average Hops per Flow: 1.88503253796
+2. Core: 0 /Aggregate: 859.7 /Edge:1000.3
+3. pm_sum: 16
+
+First fit: 
+sum(distace * flow):3830.9
+3. Average Hops per Flow: 2.01193058568
+2. Core: 0 /Aggregate: 986.8 /Edge:870.5
+3. pm_sum: 17
+tabu search: Average cost: 3509.000000, Solution result: 3555.504395
+sum(distace * flow):3555.5
+3. Average Hops per Flow: 1.88394793926
+2. Core: 0 /Aggregate: 854.8 /Edge:991.1
+3. pm_sum: 16
+Done. 
+

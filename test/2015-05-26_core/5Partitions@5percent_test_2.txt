@@ -1,0 +1,188 @@
+-a: vm按序号排列， 子图分开
+-m: MC_BF
+-n: vm nodes权重 
+-h: sort_weight_by(Gomory Hu Tree)
+-b: sort_weight_by_both(G_hu, G_origin)
+ -z: zcj method
+
+5Partitions@5percent	ing.....
+
+Node1024_cpu0.2_men0.2_stdvar1	ing.....
+
+method:  -a 
+
+Best fit: 
+  1.sum(distace * flow):28032.0
+  2.Average Hops per Flow: 3.07888757612
+  3.Core: 1230.1 /Aggregate: 7010.3 /Edge:850.6
+  4.pm_sum: 73
+tabu search:   1.sum(distace * flow):28032.0
+  2.Average Hops per Flow: 3.07888757612
+  3.Core: 1230.1 /Aggregate: 7010.3 /Edge:850.6
+  4.pm_sum: 73
+
+First fit: 
+  1.sum(distace * flow):27870.1
+  2.Average Hops per Flow: 3.05916568209
+  3.Core: 748.7 /Aggregate: 7879.1 /Edge:489.3
+  4.pm_sum: 87
+tabu search:   1.sum(distace * flow):27870.1
+  2.Average Hops per Flow: 3.05916568209
+  3.Core: 748.7 /Aggregate: 7879.1 /Edge:489.3
+  4.pm_sum: 87
+
+method:  -m 
+
+Best fit: 
+  1.sum(distace * flow):25536.8
+  2.Average Hops per Flow: 2.79496500954
+  3.Core: 787.6 /Aggregate: 6705.4 /Edge:1482.6
+  4.pm_sum: 72
+tabu search:   1.sum(distace * flow):25536.8
+  2.Average Hops per Flow: 2.79496500954
+  3.Core: 787.6 /Aggregate: 6705.4 /Edge:1482.6
+  4.pm_sum: 72
+
+First fit: 
+  1.sum(distace * flow):25282.4
+  2.Average Hops per Flow: 2.76061074252
+  3.Core: 464.7 /Aggregate: 7214.6 /Edge:1315.1
+  4.pm_sum: 88
+tabu search:   1.sum(distace * flow):25282.4
+  2.Average Hops per Flow: 2.76061074252
+  3.Core: 464.7 /Aggregate: 7214.6 /Edge:1315.1
+  4.pm_sum: 88
+
+method:  -n 
+
+Best fit: 
+  1.sum(distace * flow):26256.7
+  2.Average Hops per Flow: 2.90793419976
+  3.Core: 926.5 /Aggregate: 6770.4 /Edge:1313.0
+  4.pm_sum: 72
+tabu search:   1.sum(distace * flow):26256.7
+  2.Average Hops per Flow: 2.90793419976
+  3.Core: 926.5 /Aggregate: 6770.4 /Edge:1313.0
+  4.pm_sum: 72
+
+First fit: 
+  1.sum(distace * flow):29444.6
+  2.Average Hops per Flow: 3.25402163046
+  3.Core: 2214.7 /Aggregate: 5768.0 /Edge:1067.1
+  4.pm_sum: 89
+tabu search:   1.sum(distace * flow):29444.6
+  2.Average Hops per Flow: 3.25402163046
+  3.Core: 2214.7 /Aggregate: 5768.0 /Edge:1067.1
+  4.pm_sum: 89
+
+method:  -h 
+
+Best fit: 
+  1.sum(distace * flow):26130.6
+  2.Average Hops per Flow: 2.90120876125
+  3.Core: 893.3 /Aggregate: 6770.1 /Edge:1353.8
+  4.pm_sum: 73
+tabu search:   1.sum(distace * flow):26130.6
+  2.Average Hops per Flow: 2.90120876125
+  3.Core: 893.3 /Aggregate: 6770.1 /Edge:1353.8
+  4.pm_sum: 73
+
+First fit: 
+  1.sum(distace * flow):29624.7
+  2.Average Hops per Flow: 3.26810869763
+  3.Core: 2249.3 /Aggregate: 5788.9 /Edge:1011.5
+  4.pm_sum: 91
+tabu search:   1.sum(distace * flow):29624.7
+  2.Average Hops per Flow: 3.26810869763
+  3.Core: 2249.3 /Aggregate: 5788.9 /Edge:1011.5
+  4.pm_sum: 91
+
+method: -matlab _ncut
+
+Best fit: 
+  1.sum(distace * flow):24039.2
+  2.Average Hops per Flow: 2.711169681
+  3.Core: 805.3 /Aggregate: 5995.6 /Edge:2025.9
+  4.pm_sum: 73
+tabu search:   1.sum(distace * flow):24039.2
+  2.Average Hops per Flow: 2.711169681
+  3.Core: 805.3 /Aggregate: 5995.6 /Edge:2025.9
+  4.pm_sum: 73
+
+First fit: 
+  1.sum(distace * flow):23071.9
+  2.Average Hops per Flow: 2.63564482414
+  3.Core: 298.3 /Aggregate: 6589.5 /Edge:1811.9
+  4.pm_sum: 90
+tabu search:   1.sum(distace * flow):23071.9
+  2.Average Hops per Flow: 2.63564482414
+  3.Core: 298.3 /Aggregate: 6589.5 /Edge:1811.9
+  4.pm_sum: 90
+
+method: -matlab _ncc
+
+Best fit: 
+  1.sum(distace * flow):23980.6
+  2.Average Hops per Flow: 2.71007906934
+  3.Core: 856.1 /Aggregate: 5871.2 /Edge:2086.5
+  4.pm_sum: 73
+tabu search:   1.sum(distace * flow):23980.6
+  2.Average Hops per Flow: 2.71007906934
+  3.Core: 856.1 /Aggregate: 5871.2 /Edge:2086.5
+  4.pm_sum: 73
+
+First fit: 
+  1.sum(distace * flow):23140.8
+  2.Average Hops per Flow: 2.64064346087
+  3.Core: 363.0 /Aggregate: 6487.7 /Edge:1862.7
+  4.pm_sum: 88
+tabu search:   1.sum(distace * flow):23140.8
+  2.Average Hops per Flow: 2.64064346087
+  3.Core: 363.0 /Aggregate: 6487.7 /Edge:1862.7
+  4.pm_sum: 88
+
+method: -matlab _rcut
+
+Best fit: 
+  1.sum(distace * flow):24636.0
+  2.Average Hops per Flow: 2.72080341725
+  3.Core: 811.7 /Aggregate: 6242.1 /Edge:1851.2
+  4.pm_sum: 73
+tabu search:   1.sum(distace * flow):24636.0
+  2.Average Hops per Flow: 2.72080341725
+  3.Core: 811.7 /Aggregate: 6242.1 /Edge:1851.2
+  4.pm_sum: 73
+
+First fit: 
+  1.sum(distace * flow):23725.7
+  2.Average Hops per Flow: 2.64955012269
+  3.Core: 252.6 /Aggregate: 6923.3 /Edge:1692.8
+  4.pm_sum: 90
+tabu search:   1.sum(distace * flow):23725.7
+  2.Average Hops per Flow: 2.64955012269
+  3.Core: 252.6 /Aggregate: 6923.3 /Edge:1692.8
+  4.pm_sum: 90
+
+method: -matlab _rcc
+
+Best fit: 
+  1.sum(distace * flow):24488.7
+  2.Average Hops per Flow: 2.71844042534
+  3.Core: 822.1 /Aggregate: 6156.9 /Edge:1907.5
+  4.pm_sum: 73
+tabu search:   1.sum(distace * flow):24488.7
+  2.Average Hops per Flow: 2.71844042534
+  3.Core: 822.1 /Aggregate: 6156.9 /Edge:1907.5
+  4.pm_sum: 73
+
+First fit: 
+  1.sum(distace * flow):23153.7
+  2.Average Hops per Flow: 2.58265927474
+  3.Core: 34.7 /Aggregate: 7084.1 /Edge:1727.9
+  4.pm_sum: 91
+tabu search:   1.sum(distace * flow):23153.7
+  2.Average Hops per Flow: 2.58265927474
+  3.Core: 34.7 /Aggregate: 7084.1 /Edge:1727.9
+  4.pm_sum: 91
+Done. 
+

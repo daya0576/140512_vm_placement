@@ -1,0 +1,64 @@
+-a: vm按序号排列， 子图分开
+-m: MC_BF
+-n: vm nodes权重 
+-h: sort_weight_by(Gomory Hu Tree)
+-b: sort_weight_by_both(G_hu, G_origin)
+ -z: zcj method
+
+2Partitions@5percent	ing.....
+
+Node1024_cpu0.2_men0.2_stdvar1	ing.....
+method:  -a 
+Best fit: sum(distace * flow):10175.0
+Average cost: 8943.000000, average dev: 773.339844
+First fit: sum(distace * flow):10435.1
+Average cost: 7271.000000, average dev: 610.058594
+method:  -m 
+Best fit: sum(distace * flow):9376.6
+Average cost: 8591.000000, average dev: 738.964844
+First fit: sum(distace * flow):9394.8
+Average cost: 8518.000000, average dev: 731.835938
+method:  -n 
+Best fit: sum(distace * flow):9242.2
+Average cost: 9033.000000, average dev: 782.128906
+First fit: sum(distace * flow):9848.1
+Average cost: 8032.000000, average dev: 684.375000
+method:  -h 
+Best fit: sum(distace * flow):9332.7
+Average cost: 8700.000000, average dev: 749.609375
+First fit: sum(distace * flow):9923.7
+Average cost: 8186.000000, average dev: 699.414063
+method: -matlab _ncut
+Best fit: sum(distace * flow):8840.0
+Average cost: 8351.000000, average dev: 715.527344
+First fit: sum(distace * flow):8919.4
+Average cost: 8357.000000, average dev: 716.113281
+method: -matlab _ncc
+Best fit: sum(distace * flow):8865.3
+Average cost: 8211.000000, average dev: 701.855469
+First fit: sum(distace * flow):9111.3
+Average cost: 8232.000000, average dev: 703.906250
+method: -matlab _rcut
+Best fit: sum(distace * flow):9032.7
+Average cost: 8451.000000, average dev: 725.292969
+First fit: sum(distace * flow):8887.8
+Average cost: 8138.000000, average dev: 694.726563
+method: -matlab _rcc
+Best fit: sum(distace * flow):8993.8
+Average cost: 8445.000000, average dev: 724.707031
+First fit: sum(distace * flow):9359.7
+Average cost: 2535.000000, average dev: 147.558594
+Done. 
+
+
+ 2535 Solution found by tabu search:
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 19 22 11 7 12 23 23 20 23 5 21 15 14 12 16 11 18 10 17 16 8 19 9 13 21 6 13 23 5 19 5 4 4 3 19 15 11 22 13 2 8 9 1 2 9 17 1 22 19 4 18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 30 33 26 35 36 28 39 34 35 24 34 33 26 29 32 27 29 25 37 38 36 32 36 39 27 33 28 38 27 37 38 38 25 24 32 32 36 29 32 35 33 28 38 24 34 29 25 37 28 39 32 39 39 34 26 33 35 36 26 26 34 35 31 36 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 20 10 16 8 10 15 3 10 21 12 0 23 19 15 22 2 19 2 2 12 17 18 17 4 19 23 8 19 5 11 23 3 5 16 15 9 20 7 12 3 19 0 4 6 13 14 18 14 1 16 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+Average cost: 2535.000000, average dev: 147.558594
+Solution of value: 2559.448242 found at iter. 1793 |242 -> 31|cpu(0.307382 , 0.422532)| mem(0.148499 , 0.457353)
+Solution of value: 2555.248291 found at iter. 1794 |242 -> 24|cpu(0.307382 , 0.691027)| mem(0.148499 , 0.886795)
+Solution of value: 2552.748291 found at iter. 1795 |252 -> 31|cpu(0.138686 , 0.253837)| mem(0.378263 , 0.687117)
+Solution of value: 2548.648193 found at iter. 1796 |252 -> 24|cpu(0.138686 , 0.691027)| mem(0.378263 , 0.886795)
+Solution of value: 2546.248291 found at iter. 1797 |242 -> 31|cpu(0.307382 , 0.422532)| mem(0.148499 , 0.457353)
+Solution of value: 2542.048340 found at iter. 1798 |242 -> 24|cpu(0.307382 , 0.691027)| mem(0.148499 , 0.886795)
+Solution of value: 2539.548340 found at iter. 1799 |252 -> 31|cpu(0.138686 , 0.253837)| mem(0.378263 , 0.687117)
+Solution of value: 2535.448242 found at iter. 1800 |252 -> 24|cpu(0.138686 , 0.691027)| mem(0.378263 , 0.886795)

@@ -1,0 +1,18 @@
+-a: vm按序号排列， 子图分开
+-m: MC_BF
+-n: vm nodes权重 
+-h: sort_weight_by(Gomory Hu Tree)
+-b: sort_weight_by_both(G_hu, G_origin)
+ -z: zcj method
+
+1Partitions@15percent	ing.....
+
+Node1024_cpu0.2_men0.2_stdvar1	ing.....
+method:  -a 
+-------------Algorithms2 BF-HC algorithm---------------
+input/vm_flow_matrix/1Partitions@15percent.data
+len(nodes_result): 306
+ Best Fit~~
+sum(distace * flow): 56120.1
+Done. 
+

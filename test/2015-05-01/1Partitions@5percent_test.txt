@@ -1,0 +1,48 @@
+-a: vm按序号排列， 子图分开
+-m: MC_BF
+-n: vm nodes权重 
+-h: sort_weight_by(Gomory Hu Tree)
+-b: sort_weight_by_both(G_hu, G_origin)
+ -z: zcj method
+
+1Partitions@5percent	ing.....
+
+Node1024_cpu0.2_men0.2_stdvar1	ing.....
+method:  -a 
+-------------Algorithms2 BF-HC algorithm---------------
+input/vm_flow_matrix/1Partitions@5percent.data
+len(nodes_result): 65
+ Best Fit~~
+sum(distace * flow): 4027.6
+method:  -m 
+-------------Algorithms2 BF-HC algorithm---------------
+input/vm_flow_matrix/1Partitions@5percent.data
+len(nodes_result): 65
+ Best Fit~~
+sum(distace * flow): 3767.7
+method: -matlab _ncut
+-------------Algorithms2 BF-HC algorithm---------------
+input/vm_flow_matrix/1Partitions@5percent.data
+len(nodes_result): 65
+ Best Fit~~
+sum(distace * flow): 3767.7
+method: -matlab _ncc
+-------------Algorithms2 BF-HC algorithm---------------
+input/vm_flow_matrix/1Partitions@5percent.data
+len(nodes_result): 65
+ Best Fit~~
+sum(distace * flow): 3767.7
+method: -matlab _rcut
+-------------Algorithms2 BF-HC algorithm---------------
+input/vm_flow_matrix/1Partitions@5percent.data
+len(nodes_result): 65
+ Best Fit~~
+sum(distace * flow): 3767.7
+method: -matlab _rcc
+-------------Algorithms2 BF-HC algorithm---------------
+input/vm_flow_matrix/1Partitions@5percent.data
+len(nodes_result): 65
+ Best Fit~~
+sum(distace * flow): 3767.7
+Done. 
+

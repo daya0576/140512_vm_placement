@@ -1,0 +1,544 @@
+-a: vm按序号排列， 子图分开
+-m: MC_BF
+-n: vm nodes权重 
+-h: sort_weight_by(Gomory Hu Tree)
+-b: sort_weight_by_both(G_hu, G_origin)
+ -z: zcj method
+
+1Partitions@15percent	ing.....
+
+Node1024_cpu0.5_men0.2_stdvar1	ing.....
+
+method:  -a 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):85153.4
+  2.Average Hops per Flow: 4.53859773371
+  3. Core: 14805.7 /Aggregate: 3900.9 /Edge:18706.6
+  4.pm_sum: 184
+tabu search: Average cost: 74144.000000, Solution result: 77889.921875
+  1.sum(distace * flow):77889.9
+  2.Average Hops per Flow: 4.20113314448
+  3. Core: 11824.1 /Aggregate: 6794.8 /Edge:18618.9
+  4.pm_sum: 185
+First fit: 
+  1.sum(distace * flow):89320.3
+  2.Average Hops per Flow: 4.76637747875
+  3. Core: 16717.6 /Aggregate: 2011.5 /Edge:18729.1
+  4.pm_sum: 227
+tabu search: Average cost: 64079.000000, Solution result: 77347.625000
+  1.sum(distace * flow):77347.7
+  2.Average Hops per Flow: 4.17222910765
+  3. Core: 11753.0 /Aggregate: 6845.3 /Edge:18598.3
+  4.pm_sum: 193
+
+method:  -m 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):78554.7
+  2.Average Hops per Flow: 4.21852868272
+  3. Core: 12050.5 /Aggregate: 6615.4 /Edge:18665.9
+  4.pm_sum: 184
+tabu search: Average cost: 77050.000000, Solution result: 77276.023438
+  1.sum(distace * flow):77276.1
+  2.Average Hops per Flow: 4.16435021246
+  3. Core: 11576.8 /Aggregate: 7050.3 /Edge:18627.1
+  4.pm_sum: 183
+First fit: 
+  1.sum(distace * flow):81477.6
+  2.Average Hops per Flow: 4.37978045326
+  3. Core: 13379.2 /Aggregate: 5303.4 /Edge:18682.6
+  4.pm_sum: 218
+tabu search: Average cost: 76761.000000, Solution result: 77385.226563
+  1.sum(distace * flow):77385.3
+  2.Average Hops per Flow: 4.18590651558
+  3. Core: 11734.4 /Aggregate: 6873.3 /Edge:18607.7
+  4.pm_sum: 193
+
+method:  -n 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):78712.3
+  2.Average Hops per Flow: 4.21450070822
+  3. Core: 12123.0 /Aggregate: 6541.5 /Edge:18664.5
+  4.pm_sum: 181
+tabu search: Average cost: 77473.000000, Solution result: 77559.671875
+  1.sum(distace * flow):77559.7
+  2.Average Hops per Flow: 4.17112252125
+  3. Core: 11716.3 /Aggregate: 6921.4 /Edge:18637.7
+  4.pm_sum: 183
+First fit: 
+  1.sum(distace * flow):82196.6
+  2.Average Hops per Flow: 4.39066926346
+  3. Core: 13657.8 /Aggregate: 5046.6 /Edge:18704.4
+  4.pm_sum: 220
+tabu search: Average cost: 76241.000000, Solution result: 77048.242188
+  1.sum(distace * flow):77048.3
+  2.Average Hops per Flow: 4.14522839943
+  3. Core: 11560.6 /Aggregate: 7033.5 /Edge:18594.1
+  4.pm_sum: 192
+
+method:  -h 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):78877.4
+  2.Average Hops per Flow: 4.22202549575
+  3. Core: 12177.5 /Aggregate: 6488.7 /Edge:18666.2
+  4.pm_sum: 182
+tabu search: Average cost: 77197.000000, Solution result: 77425.265625
+  1.sum(distace * flow):77425.3
+  2.Average Hops per Flow: 4.16620927762
+  3. Core: 11671.6 /Aggregate: 6961.1 /Edge:18632.7
+  4.pm_sum: 183
+First fit: 
+  1.sum(distace * flow):82361.9
+  2.Average Hops per Flow: 4.40160233711
+  3. Core: 13730.7 /Aggregate: 4967.6 /Edge:18698.3
+  4.pm_sum: 222
+tabu search: Average cost: 75849.000000, Solution result: 76734.281250
+  1.sum(distace * flow):76734.2
+  2.Average Hops per Flow: 4.14713172805
+  3. Core: 11463.4 /Aggregate: 7131.8 /Edge:18595.2
+  4.pm_sum: 192
+
+method: -matlab _ncut
+Best fit: 
+  1.sum(distace * flow):77516.0
+  2.Average Hops per Flow: 4.2253009915
+  3. Core: 11826.4 /Aggregate: 6825.4 /Edge:18651.8
+  4.pm_sum: 186
+tabu search: Average cost: 75702.000000, Solution result: 76417.539063
+  1.sum(distace * flow):76417.3
+  2.Average Hops per Flow: 4.1725832153
+  3. Core: 11440.3 /Aggregate: 7176.4 /Edge:18616.7
+  4.pm_sum: 186
+First fit: 
+  1.sum(distace * flow):79722.4
+  2.Average Hops per Flow: 4.37296388102
+  3. Core: 12979.4 /Aggregate: 5608.4 /Edge:18587.8
+  4.pm_sum: 218
+tabu search: Average cost: 53535.000000, Solution result: 77129.109375
+  1.sum(distace * flow):77129.0
+  2.Average Hops per Flow: 4.23375531161
+  3. Core: 11828.1 /Aggregate: 6743.3 /Edge:18571.4
+  4.pm_sum: 199
+
+method: -matlab _ncc
+Best fit: 
+  1.sum(distace * flow):79509.8
+  2.Average Hops per Flow: 4.25270007082
+  3. Core: 12421.3 /Aggregate: 6240.5 /Edge:18661.8
+  4.pm_sum: 183
+tabu search: Average cost: 76503.000000, Solution result: 77589.500000
+  1.sum(distace * flow):77589.5
+  2.Average Hops per Flow: 4.17665545326
+  3. Core: 11740.9 /Aggregate: 6875.2 /Edge:18616.1
+  4.pm_sum: 187
+First fit: 
+  1.sum(distace * flow):83059.2
+  2.Average Hops per Flow: 4.43254249292
+  3. Core: 13974.1 /Aggregate: 4722.7 /Edge:18696.8
+  4.pm_sum: 221
+tabu search: Average cost: 74322.000000, Solution result: 77245.054688
+  1.sum(distace * flow):77245.0
+  2.Average Hops per Flow: 4.16877655807
+  3. Core: 11697.3 /Aggregate: 6903.3 /Edge:18600.6
+  4.pm_sum: 192
+
+method: -matlab _rcut
+Best fit: 
+  1.sum(distace * flow):79015.5
+  2.Average Hops per Flow: 4.2332684136
+  3. Core: 12325.5 /Aggregate: 6339.0 /Edge:18664.5
+  4.pm_sum: 184
+tabu search: Average cost: 76877.000000, Solution result: 77548.312500
+  1.sum(distace * flow):77548.3
+  2.Average Hops per Flow: 4.16904213881
+  3. Core: 11794.1 /Aggregate: 6835.6 /Edge:18629.7
+  4.pm_sum: 183
+First fit: 
+  1.sum(distace * flow):82208.4
+  2.Average Hops per Flow: 4.40788774788
+  3. Core: 13792.0 /Aggregate: 4871.2 /Edge:18663.2
+  4.pm_sum: 220
+tabu search: Average cost: 74665.000000, Solution result: 77286.195313
+  1.sum(distace * flow):77286.3
+  2.Average Hops per Flow: 4.16222556657
+  3. Core: 11736.2 /Aggregate: 6882.9 /Edge:18619.1
+  4.pm_sum: 195
+
+method: -matlab _rcc
+Best fit: 
+  1.sum(distace * flow):78468.0
+  2.Average Hops per Flow: 4.2249026204
+  3. Core: 12119.2 /Aggregate: 6540.2 /Edge:18659.4
+  4.pm_sum: 183
+tabu search: Average cost: 69553.000000, Solution result: 77156.265625
+  1.sum(distace * flow):77156.2
+  2.Average Hops per Flow: 4.17674398017
+  3. Core: 11663.9 /Aggregate: 6960.5 /Edge:18624.4
+  4.pm_sum: 184
+First fit: 
+  1.sum(distace * flow):81220.6
+  2.Average Hops per Flow: 4.39474150142
+  3. Core: 13437.0 /Aggregate: 5193.0 /Edge:18630.0
+  4.pm_sum: 221
+tabu search: Average cost: 74938.000000, Solution result: 76959.851563
+  1.sum(distace * flow):76960.0
+  2.Average Hops per Flow: 4.17320290368
+  3. Core: 11629.8 /Aggregate: 6960.2 /Edge:18590.0
+  4.pm_sum: 192
+
+Node1024_cpu0.5_men0.5_stdvar1	ing.....
+
+method:  -a 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):83714.4
+  2.Average Hops per Flow: 4.46852868272
+  3. Core: 14156.3 /Aggregate: 4550.1 /Edge:18706.4
+  4.pm_sum: 187
+tabu search: Average cost: 76565.000000, Solution result: 78536.875000
+  1.sum(distace * flow):78536.9
+  2.Average Hops per Flow: 4.23747344193
+  3. Core: 12098.0 /Aggregate: 6533.1 /Edge:18631.1
+  4.pm_sum: 192
+First fit: 
+  1.sum(distace * flow):89558.2
+  2.Average Hops per Flow: 4.77952372521
+  3. Core: 16815.2 /Aggregate: 1920.8 /Edge:18736.0
+  4.pm_sum: 254
+tabu search: Average cost: 65302.000000, Solution result: 78681.593750
+  1.sum(distace * flow):78681.7
+  2.Average Hops per Flow: 4.26881196884
+  3. Core: 12323.3 /Aggregate: 6310.0 /Edge:18633.3
+  4.pm_sum: 205
+
+method:  -m 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):78345.1
+  2.Average Hops per Flow: 4.20812677054
+  3. Core: 11926.2 /Aggregate: 6765.5 /Edge:18691.7
+  4.pm_sum: 186
+tabu search: Average cost: 77747.000000, Solution result: 77765.648438
+  1.sum(distace * flow):77765.7
+  2.Average Hops per Flow: 4.1863934136
+  3. Core: 11721.3 /Aggregate: 6959.4 /Edge:18680.7
+  4.pm_sum: 186
+First fit: 
+  1.sum(distace * flow):82713.9
+  2.Average Hops per Flow: 4.43170148725
+  3. Core: 13868.6 /Aggregate: 4841.3 /Edge:18709.9
+  4.pm_sum: 247
+tabu search: Average cost: 66068.000000, Solution result: 78168.992188
+  1.sum(distace * flow):78169.0
+  2.Average Hops per Flow: 4.22879780453
+  3. Core: 12063.5 /Aggregate: 6578.9 /Edge:18642.4
+  4.pm_sum: 201
+
+method:  -n 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):78569.5
+  2.Average Hops per Flow: 4.20232825779
+  3. Core: 12009.2 /Aggregate: 6685.5 /Edge:18694.7
+  4.pm_sum: 186
+tabu search: Average cost: 78016.000000, Solution result: 78019.515625
+  1.sum(distace * flow):78019.5
+  2.Average Hops per Flow: 4.18099327195
+  3. Core: 11817.7 /Aggregate: 6859.6 /Edge:18677.3
+  4.pm_sum: 187
+First fit: 
+  1.sum(distace * flow):83389.5
+  2.Average Hops per Flow: 4.44568873938
+  3. Core: 14158.8 /Aggregate: 4549.9 /Edge:18708.7
+  4.pm_sum: 258
+tabu search: Average cost: 75941.000000, Solution result: 77799.109375
+  1.sum(distace * flow):77799.0
+  2.Average Hops per Flow: 4.20250531161
+  3. Core: 11876.5 /Aggregate: 6748.7 /Edge:18625.2
+  4.pm_sum: 198
+
+method:  -h 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):78602.2
+  2.Average Hops per Flow: 4.20370042493
+  3. Core: 12035.3 /Aggregate: 6662.7 /Edge:18698.0
+  4.pm_sum: 186
+tabu search: Average cost: 77983.000000, Solution result: 77972.460938
+  1.sum(distace * flow):77972.5
+  2.Average Hops per Flow: 4.18055063739
+  3. Core: 11798.3 /Aggregate: 6896.8 /Edge:18695.1
+  4.pm_sum: 186
+First fit: 
+  1.sum(distace * flow):83339.2
+  2.Average Hops per Flow: 4.44290014164
+  3. Core: 14128.0 /Aggregate: 4580.0 /Edge:18708.0
+  4.pm_sum: 254
+tabu search: Average cost: 76085.000000, Solution result: 77841.117188
+  1.sum(distace * flow):77841.1
+  2.Average Hops per Flow: 4.20024787535
+  3. Core: 11861.2 /Aggregate: 6793.3 /Edge:18654.5
+  4.pm_sum: 198
+
+method: -matlab _ncut
+Best fit: 
+  1.sum(distace * flow):77543.7
+  2.Average Hops per Flow: 4.2114907932
+  3. Core: 11759.2 /Aggregate: 6900.3 /Edge:18659.5
+  4.pm_sum: 184
+tabu search: Average cost: 76787.000000, Solution result: 76894.828125
+  1.sum(distace * flow):76894.8
+  2.Average Hops per Flow: 4.19582152975
+  3. Core: 11534.0 /Aggregate: 7105.8 /Edge:18639.8
+  4.pm_sum: 184
+First fit: 
+  1.sum(distace * flow):80581.9
+  2.Average Hops per Flow: 4.41868803116
+  3. Core: 13276.4 /Aggregate: 5358.5 /Edge:18634.9
+  4.pm_sum: 246
+tabu search: Average cost: 78415.000000, Solution result: 78296.687500
+  1.sum(distace * flow):78296.5
+  2.Average Hops per Flow: 4.27496458924
+  3. Core: 12242.1 /Aggregate: 6365.2 /Edge:18607.3
+  4.pm_sum: 209
+
+method: -matlab _ncc
+Best fit: 
+  1.sum(distace * flow):79081.8
+  2.Average Hops per Flow: 4.21981232295
+  3. Core: 12225.8 /Aggregate: 6450.6 /Edge:18676.4
+  4.pm_sum: 184
+tabu search: Average cost: 78262.000000, Solution result: 78318.453125
+  1.sum(distace * flow):78318.5
+  2.Average Hops per Flow: 4.19706090652
+  3. Core: 11934.2 /Aggregate: 6735.1 /Edge:18669.3
+  4.pm_sum: 184
+First fit: 
+  1.sum(distace * flow):83482.2
+  2.Average Hops per Flow: 4.45737429178
+  3. Core: 14100.9 /Aggregate: 4605.5 /Edge:18706.4
+  4.pm_sum: 246
+tabu search: Average cost: 75420.000000, Solution result: 78317.484375
+  1.sum(distace * flow):78317.4
+  2.Average Hops per Flow: 4.22844369688
+  3. Core: 12127.1 /Aggregate: 6503.7 /Edge:18630.8
+  4.pm_sum: 200
+
+method: -matlab _rcut
+Best fit: 
+  1.sum(distace * flow):78799.4
+  2.Average Hops per Flow: 4.21852868272
+  3. Core: 12160.1 /Aggregate: 6509.3 /Edge:18669.4
+  4.pm_sum: 186
+tabu search: Average cost: 78076.000000, Solution result: 78131.789063
+  1.sum(distace * flow):78131.8
+  2.Average Hops per Flow: 4.20104461756
+  3. Core: 11943.9 /Aggregate: 6704.3 /Edge:18648.2
+  4.pm_sum: 187
+First fit: 
+  1.sum(distace * flow):82745.2
+  2.Average Hops per Flow: 4.44427230878
+  3. Core: 13985.8 /Aggregate: 4690.0 /Edge:18675.8
+  4.pm_sum: 248
+tabu search: Average cost: 74797.000000, Solution result: 78099.750000
+  1.sum(distace * flow):78099.7
+  2.Average Hops per Flow: 4.22313208215
+  3. Core: 12049.5 /Aggregate: 6573.8 /Edge:18623.3
+  4.pm_sum: 200
+
+method: -matlab _rcc
+Best fit: 
+  1.sum(distace * flow):78296.5
+  2.Average Hops per Flow: 4.21839589235
+  3. Core: 11994.0 /Aggregate: 6684.7 /Edge:18678.7
+  4.pm_sum: 184
+tabu search: Average cost: 77258.000000, Solution result: 77494.609375
+  1.sum(distace * flow):77494.6
+  2.Average Hops per Flow: 4.1929444051
+  3. Core: 11727.1 /Aggregate: 6926.9 /Edge:18654.0
+  4.pm_sum: 183
+First fit: 
+  1.sum(distace * flow):82101.6
+  2.Average Hops per Flow: 4.44639695467
+  3. Core: 13764.0 /Aggregate: 4919.6 /Edge:18683.6
+  4.pm_sum: 255
+tabu search: Average cost: 75343.000000, Solution result: 78545.609375
+  1.sum(distace * flow):78545.6
+  2.Average Hops per Flow: 4.26571352691
+  3. Core: 12316.3 /Aggregate: 6314.7 /Edge:18631.0
+  4.pm_sum: 204
+
+Node1024_cpu0.2_men0.2_stdvar1	ing.....
+
+method:  -a 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):56120.1
+  2.Average Hops per Flow: 2.99623760623
+  3. Core: 1103.4 /Aggregate: 17527.1 /Edge:18630.5
+  4.pm_sum: 67
+tabu search: Average cost: 54641.000000, Solution result: 54658.968750
+  1.sum(distace * flow):54658.2
+  2.Average Hops per Flow: 2.9273194051
+  3. Core: 846.3 /Aggregate: 17738.5 /Edge:18584.8
+  4.pm_sum: 67
+First fit: 
+  1.sum(distace * flow):69773.0
+  2.Average Hops per Flow: 3.72494688385
+  3. Core: 7452.2 /Aggregate: 11238.8 /Edge:18691.0
+  4.pm_sum: 81
+tabu search: Average cost: 53003.000000, Solution result: 55070.027344
+  1.sum(distace * flow):55069.3
+  2.Average Hops per Flow: 2.97428293201
+  3. Core: 1905.4 /Aggregate: 16506.9 /Edge:18412.3
+  4.pm_sum: 75
+
+method:  -m 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):54515.2
+  2.Average Hops per Flow: 2.92001593484
+  3. Core: 1479.0 /Aggregate: 17023.4 /Edge:18502.4
+  4.pm_sum: 68
+tabu search: Average cost: 53845.000000, Solution result: 53852.367188
+  1.sum(distace * flow):53851.7
+  2.Average Hops per Flow: 2.89031515581
+  3. Core: 1267.3 /Aggregate: 17189.8 /Edge:18457.1
+  4.pm_sum: 68
+First fit: 
+  1.sum(distace * flow):65762.4
+  2.Average Hops per Flow: 3.53368449008
+  3. Core: 6674.5 /Aggregate: 11871.9 /Edge:18546.4
+  4.pm_sum: 83
+tabu search: Average cost: 56010.000000, Solution result: 54345.437500
+  1.sum(distace * flow):54344.7
+  2.Average Hops per Flow: 2.94422804533
+  3. Core: 1762.9 /Aggregate: 16640.2 /Edge:18403.1
+  4.pm_sum: 70
+
+method:  -n 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):53041.9
+  2.Average Hops per Flow: 2.84884029745
+  3. Core: 835.8 /Aggregate: 17682.9 /Edge:18518.7
+  4.pm_sum: 67
+tabu search: Average cost: 52906.000000, Solution result: 52923.367188
+  1.sum(distace * flow):52922.7
+  2.Average Hops per Flow: 2.84693696884
+  3. Core: 835.8 /Aggregate: 17654.3 /Edge:18490.1
+  4.pm_sum: 67
+First fit: 
+  1.sum(distace * flow):65072.2
+  2.Average Hops per Flow: 3.50933958924
+  3. Core: 6250.1 /Aggregate: 12312.9 /Edge:18563.0
+  4.pm_sum: 83
+tabu search: Average cost: 55364.000000, Solution result: 54190.722656
+  1.sum(distace * flow):54190.0
+  2.Average Hops per Flow: 2.93431303116
+  3. Core: 1600.6 /Aggregate: 16816.0 /Edge:18416.6
+  4.pm_sum: 72
+
+method:  -h 
+Best fit: 
+solution_analyze:   1.sum(distace * flow):53993.0
+  2.Average Hops per Flow: 2.90089412181
+  3. Core: 1243.3 /Aggregate: 17244.5 /Edge:18487.8
+  4.pm_sum: 68
+tabu search: Average cost: 53670.000000, Solution result: 53683.394531
+  1.sum(distace * flow):53682.7
+  2.Average Hops per Flow: 2.88655276204
+  3. Core: 1145.6 /Aggregate: 17332.5 /Edge:18478.1
+  4.pm_sum: 68
+First fit: 
+  1.sum(distace * flow):64218.2
+  2.Average Hops per Flow: 3.46091536827
+  3. Core: 5858.6 /Aggregate: 12702.8 /Edge:18561.4
+  4.pm_sum: 82
+tabu search: Average cost: 55358.000000, Solution result: 54426.664063
+  1.sum(distace * flow):54426.0
+  2.Average Hops per Flow: 2.94378541076
+  3. Core: 1690.2 /Aggregate: 16717.6 /Edge:18407.8
+  4.pm_sum: 71
+
+method: -matlab _ncut
+Best fit: 
+  1.sum(distace * flow):52161.7
+  2.Average Hops per Flow: 2.84529922096
+  3. Core: 920.2 /Aggregate: 17381.9 /Edge:18302.1
+  4.pm_sum: 68
+tabu search: Average cost: 51887.000000, Solution result: 51894.988281
+  1.sum(distace * flow):51894.3
+  2.Average Hops per Flow: 2.84379426346
+  3. Core: 920.2 /Aggregate: 17353.9 /Edge:18274.1
+  4.pm_sum: 68
+First fit: 
+  1.sum(distace * flow):62925.6
+  2.Average Hops per Flow: 3.47233533994
+  3. Core: 6100.0 /Aggregate: 12138.8 /Edge:18238.8
+  4.pm_sum: 83
+tabu search: Average cost: 56172.000000, Solution result: 54083.128906
+  1.sum(distace * flow):54082.5
+  2.Average Hops per Flow: 2.97481409348
+  3. Core: 1991.9 /Aggregate: 16239.4 /Edge:18231.3
+  4.pm_sum: 75
+
+method: -matlab _ncc
+Best fit: 
+  1.sum(distace * flow):53831.9
+  2.Average Hops per Flow: 2.87256550992
+  3. Core: 841.9 /Aggregate: 17712.0 /Edge:18553.9
+  4.pm_sum: 66
+tabu search: Average cost: 53448.000000, Solution result: 53467.425781
+  1.sum(distace * flow):53466.7
+  2.Average Hops per Flow: 2.85738314448
+  3. Core: 841.9 /Aggregate: 17674.8 /Edge:18516.7
+  4.pm_sum: 66
+First fit: 
+  1.sum(distace * flow):65632.9
+  2.Average Hops per Flow: 3.50920679887
+  3. Core: 6330.3 /Aggregate: 12231.6 /Edge:18561.9
+  4.pm_sum: 82
+tabu search: Average cost: 54827.000000, Solution result: 54164.464844
+  1.sum(distace * flow):54163.7
+  2.Average Hops per Flow: 2.92311437677
+  3. Core: 1608.7 /Aggregate: 16782.2 /Edge:18390.9
+  4.pm_sum: 71
+
+method: -matlab _rcut
+Best fit: 
+  1.sum(distace * flow):52980.9
+  2.Average Hops per Flow: 2.84419263456
+  3. Core: 833.6 /Aggregate: 17626.5 /Edge:18460.1
+  4.pm_sum: 67
+tabu search: Average cost: 52718.000000, Solution result: 52745.410156
+  1.sum(distace * flow):52744.7
+  2.Average Hops per Flow: 2.83914660057
+  3. Core: 833.6 /Aggregate: 17586.5 /Edge:18420.1
+  4.pm_sum: 67
+First fit: 
+  1.sum(distace * flow):64292.5
+  2.Average Hops per Flow: 3.45179709632
+  3. Core: 6083.4 /Aggregate: 12358.7 /Edge:18442.1
+  4.pm_sum: 82
+tabu search: Average cost: 54957.000000, Solution result: 54274.394531
+  1.sum(distace * flow):54273.7
+  2.Average Hops per Flow: 2.93657046742
+  3. Core: 1735.7 /Aggregate: 16602.0 /Edge:18337.7
+  4.pm_sum: 71
+
+method: -matlab _rcc
+Best fit: 
+  1.sum(distace * flow):53889.4
+  2.Average Hops per Flow: 2.91005665722
+  3. Core: 1388.9 /Aggregate: 17027.3 /Edge:18416.2
+  4.pm_sum: 67
+tabu search: Average cost: 53769.000000, Solution result: 53782.746094
+  1.sum(distace * flow):53782.0
+  2.Average Hops per Flow: 2.90748937677
+  3. Core: 1388.9 /Aggregate: 17014.1 /Edge:18403.0
+  4.pm_sum: 67
+First fit: 
+  1.sum(distace * flow):63965.2
+  2.Average Hops per Flow: 3.4767174221
+  3. Core: 6204.0 /Aggregate: 12183.6 /Edge:18387.6
+  4.pm_sum: 81
+tabu search: Average cost: 51190.000000, Solution result: 53688.332031
+  1.sum(distace * flow):53687.6
+  2.Average Hops per Flow: 2.91173866856
+  3. Core: 1508.5 /Aggregate: 16839.1 /Edge:18347.6
+  4.pm_sum: 74
+Done. 
+

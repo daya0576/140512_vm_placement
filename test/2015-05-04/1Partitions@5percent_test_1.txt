@@ -1,0 +1,33 @@
+-a: vm按序号排列， 子图分开
+-m: MC_BF
+-n: vm nodes权重 
+-h: sort_weight_by(Gomory Hu Tree)
+-b: sort_weight_by_both(G_hu, G_origin)
+ -z: zcj method
+
+1Partitions@5percent	ing.....
+
+Node1024_cpu0.2_men0.2_stdvar1	ing.....
+
+method:  -a 
+Best fit: Average cost: 3711.000000, average dev: 262.402344
+First fit: Average cost: 3567.000000, average dev: 248.339844
+
+method:  -m 
+Best fit: Average cost: 3548.000000, average dev: 246.484375
+First fit: Average cost: 3558.000000, average dev: 247.460938
+
+method:  -n 
+Best fit: Average cost: 3346.000000, average dev: 226.757813
+First fit: Average cost: 3492.000000, average dev: 241.015625
+
+method:  -h 
+Best fit: Average cost: 3532.000000, average dev: 244.921875
+First fit: Average cost: 3452.000000, average dev: 237.109375
+
+method: -matlab _ncut
+Best fit: Average cost: 3408.000000, average dev: 232.812500
+First fit: Average cost: 3559.000000, average dev: 247.558594
+
+method: -matlab _ncc
+Best fit: Average cost: 1022.000000, average dev: -0.195313

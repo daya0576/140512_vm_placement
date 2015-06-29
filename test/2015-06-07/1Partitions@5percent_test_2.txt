@@ -1,0 +1,19 @@
+-a: vm按序号排列， 子图分开
+-m: MC_BF
+-n: vm nodes权重 
+-h: sort_weight_by(Gomory Hu Tree)
+-b: sort_weight_by_both(G_hu, G_origin)
+ -z: zcj method
+
+1Partitions@5percent	ing.....
+
+Node1024_cpu0.2_men0.2_stdvar1	ing.....
+
+method:  -m 
+
+Best fit: 
+sum(distace * flow):3692.9
+  3. Average Hops per Flow: 1.91377440347
+  2. Core: 0 /Aggregate: 1865.3 /Edge:1865.3
+  3. pm_sum: 15
+tabu search: tabu_search: Average cost: 3685.000000, Solution result: 0.000000
